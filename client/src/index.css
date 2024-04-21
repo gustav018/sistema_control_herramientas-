@@ -1,0 +1,17 @@
+.menu-principal{
+    font-size: 25px;
+}
+
+.menu-principal.active{
+    color: red;
+    font-weight: bold;
+}
+
+.menu-segundario{
+    font-size: 20px;
+}
+
+.menu-segundario.active{
+    color: red;
+    font-weight: bold;
+}
