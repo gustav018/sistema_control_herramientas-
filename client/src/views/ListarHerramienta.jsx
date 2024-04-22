@@ -6,7 +6,8 @@ import MUIDataTable from "mui-datatables";
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, TableBody } from '@mui/material';
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import DashboardHerraminenta from "../components/Herramientas/DashboardHerraminenta";
 
 const ListarHerramienta = () => {
     const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
@@ -14,6 +15,7 @@ const ListarHerramienta = () => {
 
 
     const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta/user/" + idUsuario);
+    const [expandedRow, setExpandedRow] = useState(false);
 
     if (error) {
         return <div>{error.message}</div>;
@@ -64,19 +66,16 @@ const ListarHerramienta = () => {
             name: "Identificacion",
             options: {
                 filter: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Identificacion</TableCell>
-                )
+                sort: true,
+
             },
         },
         {
             name: "Descripcion",
             options: {
                 filter: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Descripcion</TableCell>
-                )
-            },
+                sort: true,
+            }
 
         },
         {
@@ -84,9 +83,6 @@ const ListarHerramienta = () => {
             options: {
                 display: false,
                 filter: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Ubicacion</TableCell>
-                )
             }
         },
         {
@@ -94,28 +90,21 @@ const ListarHerramienta = () => {
             options: {
                 display: false,
                 filter: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Calibrado por</TableCell>
-                )
+
             }
         },
         {
             name: "Fecha de Calibración",
             options: {
                 display: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Fecha de Calibración</TableCell>
-                )
+                sort: true,
+
 
             }
         },
         {
             name: "Proxima Calibración",
             options: {
-
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Proxima Calibración</TableCell>
-                )
             },
         },
         {
@@ -123,10 +112,8 @@ const ListarHerramienta = () => {
             options: {
                 filter: false,
                 sort: true,
-                sortDirection: 'asc',
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Dias para Vencimiento</TableCell>
-                )
+                sortOrder: 'asc',
+
             },
         },
         {
@@ -134,11 +121,9 @@ const ListarHerramienta = () => {
             options: {
                 filter: true,
                 sort: true,
-                sortDirection: 'asc',
+                sortOrder: 'asc',
                 customBodyRender: (value) => formatoStatus(value),
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
-                )
+
             },
         },
         {
@@ -147,18 +132,14 @@ const ListarHerramienta = () => {
                 viewColumns: false,
                 filter: false,
                 display: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Responsable</TableCell>
-                )
+
             }
         },
         {
             name: "Acciones",
             options: {
                 filter: false,
-                customHeadRender: () => (
-                    <TableCell sx={{ fontWeight: 'bold' }}>Acciones</TableCell>
-                )
+
             },
         },
     ];
@@ -187,7 +168,8 @@ const ListarHerramienta = () => {
             return (
                 <TableRow>
                     <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={colSpan}>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Collapse in={expandedRow} timeout="auto" unmountOnExit>
+
                             <Box sx={{ margin: 1 }}>
                                 <Typography variant="h6" gutterBottom component="div" sx={{ fontWeight: 'bold' }}>
                                     Detalles
@@ -243,65 +225,7 @@ const ListarHerramienta = () => {
     return (
         <SubMenu>
 
-            <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-                <NavLink to="/sistema/reporte" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" rel="noopener noreferrer"><i className="fas fa-download fa-sm text-white-50" /> Generate Report</NavLink>
-            </div>
-            <div className="row">
-                {/* Earnings (Monthly) Card Example */}
-                <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-primary shadow h-100 py-2" style={{ padding: '32px' }}>
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Total de Herramientas</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">10</div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-calendar fa-2x text-gray-300" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* Earnings (Monthly) Card Example */}
-                <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2" style={{ padding: '32px' }}>
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Herramientas a vencer en las proximos 30 dias</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">3</div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-dollar-sign fa-2x text-gray-300" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* Earnings (Monthly) Card Example */}
-
-                {/* Pending Requests Card Example */}
-                <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-warning shadow h-100 py-2" style={{ padding: '32px' }}>
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        Total herramientas vencidas:</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">3</div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-comments fa-2x text-gray-300" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <DashboardHerraminenta />
 
 
             <hr />
