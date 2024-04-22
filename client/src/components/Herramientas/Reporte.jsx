@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import useAxios from "../hooks/useAxios";
-import SubMenu from '../components/SubMenu';
+import useAxios from "../../hooks/useAxios";
+import SubMenu from '../SubMenu';
 import { Link } from 'react-router-dom';
 
 const Reporte = () => {

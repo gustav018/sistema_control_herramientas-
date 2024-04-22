@@ -1,4 +1,4 @@
-import SubMenu from "../components/SubMenu"
+import SubMenu from "../SubMenu"
 
 
 const CrearHerramienta = () => {

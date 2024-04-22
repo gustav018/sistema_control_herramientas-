@@ -1,8 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import ListPlayers from './views/ListPlayers'
-import StatusGame from './views/StatusGame'
-import AddPlayer from './views/AddPlayer'
-import CrearHerramienta from './views/CrearHerramienta'
+import CrearHerramienta from './components/Herramientas/CrearHerramienta'
 import Contenedor from './components/Contenedor'
 import LoginRegister from './views/LoginRegister'
 import { useState } from 'react'
@@ -12,9 +10,12 @@ import PrivateRoute from './components/PrivateRoute'
 
 import Listar from './views/Listar'
 import ReporteIso from './views/ReporteIso'
-import Reporte from './views/Reporte'
+import Reporte from './components/Herramientas/Reporte'
 
 import ListarHerramienta from './views/ListarHerramienta'
+import ColaboradorForm from './components/Colaboradores/ColaboradorForm'
+import ColaboradorList from './components/Colaboradores/ColaboradorList'
+import ColaboradorFormUpdate from './components/Colaboradores/ColaboradorFormUpdate'
 
 const App = () => {
 
@@ -46,14 +47,20 @@ const App = () => {
                         <Contenedor />
                     </PrivateRoute>
                 }>
+                     {/* Ruta Herramientas */}
                     <Route path="lista" element={<ListPlayers />} />
                     <Route path="listar" element={<Listar />} />
                     <Route path="list" element={<ListarHerramienta />} />
                     <Route path="pdf" element={<ReporteIso />} />
                     <Route path="reporte" element={<Reporte />} />
                     <Route path="nuevo" element={<CrearHerramienta />} />
-                    <Route path="addplayer" element={<AddPlayer />} />
-                    <Route path="status/:game" element={<StatusGame />} />
+                      {/* Fin ruta herramientas */}
+                 
+                    {/* Ruta Colaboradores */}
+                    <Route path="colaboradores/nuevo" element={<ColaboradorForm />} />
+                    <Route path="colaboradores/list" element={<ColaboradorList />} />
+                    <Route path='colaboradores/update/:id' element={<ColaboradorFormUpdate />} />
+                    {/* Fin ruta Colaboradores */}
                 </Route>
             </Routes>
         </UserContext.Provider>

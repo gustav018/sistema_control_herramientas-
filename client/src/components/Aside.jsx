@@ -37,10 +37,28 @@ const Aside = () => {
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Opciones:</h6>
                             
-                            <Link to="/sistema/nuevo" className="collapse-item" >Herramientas</Link>
+                            <Link to="/sistema/list" className="collapse-item" >Lista de herramientas</Link>
+                            <Link to="/sistema/nuevo" className="collapse-item" >Crear herramienta</Link>
                         </div>
                     </div>
                 </li>
+                
+                {/* Nav Item - Colaboradores Collapse Menu */}
+                <li className="nav-item">
+                    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColaborador" aria-expanded="false" aria-controls="collapseColaborador">
+                        <i className="fas fa-fw fa-users" />
+                        <span>Colaboradores</span>
+                    </a>
+                    <div id="collapseColaborador" className="collapse" aria-labelledby="headingColaborador" data-parent="#accordionSidebar">
+                        <div className="bg-white py-2 collapse-inner rounded">
+                            <h6 className="collapse-header">Opciones:</h6>
+                            
+                            <Link to="/sistema/colaboradores/list" className="collapse-item" >Lista de colaboradores</Link>
+                            <Link to="/sistema/colaboradores/nuevo" className="collapse-item" >Crear colaborador</Link>
+                        </div>
+                    </div>
+                </li>
+
                 {/* Nav Item - Utilities Collapse Menu */}
 
                 {/* Divider */}

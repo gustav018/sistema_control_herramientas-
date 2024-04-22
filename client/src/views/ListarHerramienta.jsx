@@ -8,11 +8,6 @@ import Chip from '@mui/material/Chip';
 import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, TableBody } from '@mui/material';
 import { NavLink } from "react-router-dom";
 
-
-
-
-
-
 const ListarHerramienta = () => {
     const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta");
 
@@ -44,16 +39,6 @@ const ListarHerramienta = () => {
         return Number(dias);
     };
 
-    /* const consultaStatus = (date) => {
-        const diasVencimiento = consultaVencimineto(date)
-        const color = diasVencimiento < 0 ? 'error' : 'success';
-        const texto = diasVencimiento < 0 ? 'Vencido' : 'Vigente';
-        return (
-            <Stack direction="row" spacing={1}>
-                <Chip label={texto} color={color} />
-            </Stack>
-        );
-    }; */
     const consultaStatus = (date) => {
         const diasVencimiento = consultaVencimineto(date);
         const texto = diasVencimiento < 0 ? 'Vencido' : 'Vigente';
@@ -71,7 +56,6 @@ const ListarHerramienta = () => {
     const idUsuarioLogin = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
-            // console.log(user._id);
             return `${user._id}`;
         }
     };
@@ -182,12 +166,11 @@ const ListarHerramienta = () => {
 
     const idUsuario = idUsuarioLogin();
     const datos = data
-        .filter(herramienta => herramienta.userId.trim() === idUsuario)
         .map((herramienta, index) => ({
             id: index,
             "Identificacion": herramienta.identificacion,
             "Descripcion": herramienta.descripcion,
-            "Ubicacion": herramienta.userId,
+            "Ubicacion": herramienta.userId.lastName,
             "Calibrado por": herramienta.calibradoPor,
             "Fecha de Calibración": formatDate(herramienta.ultimaCalibracion),
             "Proxima Calibración": formatDate(herramienta.proximaCalibracion),
@@ -196,8 +179,6 @@ const ListarHerramienta = () => {
             "Responsable":`${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
             "Acciones": <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
         }));
-
-
 
         const options = {
             filterType: 'checkbox',
@@ -260,8 +241,6 @@ const ListarHerramienta = () => {
             sort: true, // Enable sorting
         };
         
-
-
     return (
         <SubMenu>
 
@@ -272,7 +251,7 @@ const ListarHerramienta = () => {
             <div className="row">
                 {/* Earnings (Monthly) Card Example */}
                 <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-primary shadow h-100 py-2">
+                    <div className="card border-left-primary shadow h-100 py-2" style={{padding: '32px'} }>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
@@ -289,7 +268,7 @@ const ListarHerramienta = () => {
                 </div>
                 {/* Earnings (Monthly) Card Example */}
                 <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2">
+                    <div className="card border-left-success shadow h-100 py-2" style={{padding: '32px'} }>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
@@ -308,7 +287,7 @@ const ListarHerramienta = () => {
 
                 {/* Pending Requests Card Example */}
                 <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-warning shadow h-100 py-2">
+                    <div className="card border-left-warning shadow h-100 py-2" style={{padding: '32px'} }>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
