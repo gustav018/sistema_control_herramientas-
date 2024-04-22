@@ -9,7 +9,12 @@ import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, Table
 import { NavLink } from "react-router-dom";
 
 const ListarHerramienta = () => {
-    const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta");
+    const idUsuarioLogin = () => 
+        JSON.parse(localStorage.getItem('user'))?._id || ''; 
+    const idUsuario = idUsuarioLogin();
+    console.log(idUsuario);
+
+    const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta/user/"+idUsuario);
 
     if (error) {
         return <div>{error.message}</div>;
@@ -53,12 +58,7 @@ const ListarHerramienta = () => {
         );
     };
 
-    const idUsuarioLogin = () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            return `${user._id}`;
-        }
-    };
+   
 
     const columns = [
         {
@@ -164,13 +164,13 @@ const ListarHerramienta = () => {
         },
     ];
 
-    const idUsuario = idUsuarioLogin();
+   
     const datos = data
         .map((herramienta, index) => ({
             id: index,
             "Identificacion": herramienta.identificacion,
             "Descripcion": herramienta.descripcion,
-            "Ubicacion": herramienta.userId.lastName,
+            "Ubicacion": herramienta.userId.sucursal,
             "Calibrado por": herramienta.calibradoPor,
             "Fecha de Calibración": formatDate(herramienta.ultimaCalibracion),
             "Proxima Calibración": formatDate(herramienta.proximaCalibracion),

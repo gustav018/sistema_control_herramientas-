@@ -12,6 +12,8 @@ HerramientaRouter.get("/:id", authenticate,  HerramientaController.getOneHerrami
 HerramientaRouter.put("/:id",authenticate, HerramientaController.updateOneHerramientaById);
 HerramientaRouter.patch("/:id/:game",authenticate, HerramientaController.updateGamesHerramientaById);
 HerramientaRouter.delete("/:id",authenticate, HerramientaController.deleteOneHerramientaById);
+HerramientaRouter.get("/user/:userId", authenticate, HerramientaController.getAllHerramientasByUserId);
+
 
 
 module.exports = HerramientaRouter;

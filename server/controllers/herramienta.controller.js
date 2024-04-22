@@ -30,6 +30,18 @@ module.exports = {
     },
 
 
+    getAllHerramientasByUserId: (req, res) => {
+        HerramientaModel.find({ userId: req.params.userId })
+            .populate("colaboradorId", "nombre apellido sucursal -_id")
+            .populate("userId", "firstName lastName sucursal _id")
+            .then((allHerramientas) => res.status(200).json(allHerramientas)) // Devuelve directamente el array
+            .catch((err) =>
+                res.status(400).json({ message: "Something went wrong", error: err })
+            );
+    },
+    
+    
+
     
     createNewHerramienta: (req, res) => {
         let newHerramientaCreated;
