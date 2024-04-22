@@ -14,7 +14,7 @@ const HerramientasPorVencer = () => {
                 const proximaCalibracion = new Date(herramienta.proximaCalibracion);
                 const hoy = new Date();
                 const diasRestantes = Math.ceil((proximaCalibracion - hoy) / (1000 * 60 * 60 * 24));
-                return diasRestantes <= 30 && diasRestantes > 0;
+                return diasRestantes <= 30 && diasRestantes >= 0;
             });
             setHerramientasPorVencer(herramientasFiltradas);
         }

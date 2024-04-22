@@ -100,13 +100,7 @@ const UserForm = ({formType}) => {
                                 <Field type="text" name="lastName" className="form-control" placeholder="Apellido" />
                                 <ErrorMessage name="lastName" component="div" className="text-danger" />
                             </div>
-                        </>
-                    )}
-                    <div className="mb-3">
-                        <Field type="email" name="email" className="form-control" placeholder="Email" />
-                        <ErrorMessage name="email" component="div" className="text-danger" />
-                    </div>
-                    <div className="mb-3">
+                            <div className="mb-3">
                         <Field as="select" name="sucursal" className="form-select" placeholder="Sucursal">
                             <option value="">Selecciona una sucursal</option>
                             <option value="Sucursal Madame Lynch">ML</option>
@@ -117,6 +111,13 @@ const UserForm = ({formType}) => {
                         </Field>
                         <ErrorMessage name="sucursal" component="div" className="text-danger" />
                     </div>
+                        </>
+                    )}
+                    <div className="mb-3">
+                        <Field type="email" name="email" className="form-control" placeholder="Email" />
+                        <ErrorMessage name="email" component="div" className="text-danger" />
+                    </div>
+                    
                     <div className="mb-3">
                         <Field type="password" name="password" className="form-control" placeholder="password" />
                         <ErrorMessage name="password" component="div" className="text-danger" />

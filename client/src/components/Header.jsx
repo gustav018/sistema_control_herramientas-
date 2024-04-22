@@ -16,7 +16,7 @@ const Header = () => {
                 <hr className="sidebar-divider my-0" />
                 {/* Nav Item - Dashboard */}
                 <li className="nav-item">
-                    <Link to="/sistema/list" className="nav-link">
+                    <Link to="sistema/herramientas/list" className="nav-link">
                         <i className="fas fa-fw fa-tachometer-alt" />
                         <span>Dashboard</span></Link>
 

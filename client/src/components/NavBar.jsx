@@ -79,7 +79,7 @@ const NavBar = () => {
 
 
 
-                            <Link to="/sistema/list" className="dropdown-item d-flex align-items-center">
+                            <Link to="/sistema/herramientas/list" className="dropdown-item d-flex align-items-center">
                                 <div className="mr-3">
                                     <div className="icon-circle bg-warning">
                                         <i className="fas fa-exclamation-triangle text-white" />

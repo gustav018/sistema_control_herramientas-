@@ -195,7 +195,7 @@ const HerramientasFormUpdate = () => {
 
 
                     </div>
-                    <button type="submit" className="btn btn-primary btn-user btn-block">Registrar Herramienta</button>
+                    <button type="submit" className="btn btn-primary btn-user btn-block">Actualizar Herramienta</button>
                     <ColaboradorSelect />
                 </form>
 

@@ -17,7 +17,7 @@ const Aside = () => {
                 {/* Nav Item - Dashboard */}
                 <li className="nav-item">
                    
-                    <Link className="nav-link" to="/sistema/list">
+                    <Link className="nav-link" to="/sistema/herramientas/list">
                         <i className="fas fa-fw fa-tachometer-alt" />
                         <span>Dashboard</span></Link>
                 </li>

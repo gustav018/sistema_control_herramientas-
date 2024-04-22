@@ -7,8 +7,6 @@ import { useState } from 'react'
 import UserContext from './context/UserContext'
 import PublicRoute from './components/PublicRoute'
 import PrivateRoute from './components/PrivateRoute'
-
-import Listar from './views/Listar'
 import ReporteIso from './views/ReporteIso'
 import Reporte from './components/Herramientas/Reporte'
 
@@ -37,7 +35,7 @@ const App = () => {
     return (
         <UserContext.Provider value={objetoContexto}>
             <Routes>
-                <Route path="/" element={<Navigate to="/sistema/list" />} />
+                <Route path="/" element={<Navigate to="/sistema/herramientas/list" />} />
                 <Route path="/login" element={
                     <PublicRoute>
                         <LoginRegister />
@@ -50,7 +48,7 @@ const App = () => {
                 }>
                      {/* Ruta Herramientas */}
                     <Route path="lista" element={<ListPlayers />} />
-                    <Route path="listar" element={<Listar />} />
+       
                     <Route path="herramientas/list" element={<ListarHerramienta />} />
                     <Route path="pdf" element={<ReporteIso />} />
                     <Route path="herramientas/reporte" element={<Reporte />} />

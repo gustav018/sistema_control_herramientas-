@@ -109,7 +109,7 @@ const CrearHerramienta = () => {
           cancelButtonText: 'Crear otra herramienta',
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate('/sistema/list');
+            navigate('/sistema/herramientas/list');
 
           }
         });
