@@ -9,7 +9,7 @@ const DashboardHerraminenta = () => {
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-                <NavLink to="/sistema/reporte" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" rel="noopener noreferrer"><i className="fas fa-download fa-sm text-white-50" /> Generate Report</NavLink>
+                <NavLink to="/sistema/reporte" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" rel="noopener noreferrer"><i className="fas fa-download fa-sm text-white-50" /> Generar Reporte ISO</NavLink>
             </div>
             <div className="row">
                 {/* Earnings (Monthly) Card Example */}
@@ -45,7 +45,7 @@ const DashboardHerraminenta = () => {
                                     </div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-dollar-sign fa-2x text-gray-300" />
+                                    <i className="fas fa-hourglass-half fa-2x text-gray-300" />
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ const DashboardHerraminenta = () => {
                                 </div>
                                 <div className="col-auto">
                                     <Link to="/sistema/list" className="btn btn-primary ml-2">
-                                        <span className="ml-2">Ver a detalle</span>
+                                        <span className="ml-2">Ver detalle</span>
                                     </Link>
                                 </div>
                             </div>
