@@ -16,6 +16,7 @@ import ListarHerramienta from './views/ListarHerramienta'
 import ColaboradorForm from './components/Colaboradores/ColaboradorForm'
 import ColaboradorList from './components/Colaboradores/ColaboradorList'
 import ColaboradorFormUpdate from './components/Colaboradores/ColaboradorFormUpdate'
+import HerramientasFormUpdate from './components/Herramientas/HerramientasFormUpdate'
 
 const App = () => {
 
@@ -50,10 +51,11 @@ const App = () => {
                      {/* Ruta Herramientas */}
                     <Route path="lista" element={<ListPlayers />} />
                     <Route path="listar" element={<Listar />} />
-                    <Route path="list" element={<ListarHerramienta />} />
+                    <Route path="herramientas/list" element={<ListarHerramienta />} />
                     <Route path="pdf" element={<ReporteIso />} />
                     <Route path="reporte" element={<Reporte />} />
-                    <Route path="nuevo" element={<CrearHerramienta />} />
+                    <Route path="herramientas/nuevo" element={<CrearHerramienta />} />
+                    <Route path="herramientas/update/:id" element={<HerramientasFormUpdate />} />
                       {/* Fin ruta herramientas */}
                  
                     {/* Ruta Colaboradores */}

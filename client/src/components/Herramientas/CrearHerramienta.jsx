@@ -12,7 +12,6 @@ import ColaboradorSelect from "../Colaboradores/ColaboradorSelect";
 const CrearHerramienta = () => {
   const [totalHerramientas, setTotalHerramientas] = useState(0);
 
-  // Hacer una solicitud al backend para obtener los datos de todas las herramientas
   const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("http://localhost:8000/api/herramienta");
 
   const navigate = useNavigate();
@@ -53,26 +52,18 @@ const CrearHerramienta = () => {
   
   
   const transformDescriptionToIdentificacion = (description) => {
-    // Convertir la descripción a mayúsculas
     const upperCaseDescription = description.toUpperCase();
-    // Separar la descripción en palabras
     const words = upperCaseDescription.split(' ');
-    // Filtrar palabras de dos caracteres
     const filteredWords = words.filter(word => word.length > 2);
-    // Construir la identificación usando la primera letra de cada palabra
     let identificacion = '';
     filteredWords.forEach((word, index) => {
-      // Agregar la primera letra de cada palabra, seguida de un guión, excepto para la última palabra
       if (index < filteredWords.length - 1) {
         identificacion += word.charAt(0) + '';
       } else {
-        // Para la última palabra, solo agregar la primera letra
         identificacion += word.charAt(0);
       }
       
     });
-    // Agregar un sufijo estático o lógica adicional para completar la identificación
-    // En este ejemplo, simplemente agrego "-TR-00"
     identificacion += `-TR-00${totalHerramientas}`;
     return identificacion;
   };

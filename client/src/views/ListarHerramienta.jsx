@@ -160,7 +160,7 @@ const ListarHerramienta = () => {
             "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
             "Acciones": (
                 <>
-                <Link to={`/sistema/herramienta/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
+                <Link to={`/sistema/herramientas/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
                 <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
                 </>
             )
