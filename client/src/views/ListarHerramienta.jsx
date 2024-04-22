@@ -6,8 +6,9 @@ import MUIDataTable from "mui-datatables";
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, TableBody } from '@mui/material';
-import { useState } from "react";
+
 import DashboardHerraminenta from "../components/Herramientas/DashboardHerraminenta";
+import { Link } from "react-router-dom";
 
 const ListarHerramienta = () => {
     const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
@@ -15,7 +16,7 @@ const ListarHerramienta = () => {
 
 
     const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta/user/" + idUsuario);
-    const [expandedRow, setExpandedRow] = useState(false);
+
 
     if (error) {
         return <div>{error.message}</div>;
@@ -157,7 +158,12 @@ const ListarHerramienta = () => {
             "Dias para Vencimiento": consultaVencimineto(herramienta.proximaCalibracion),
             "Status": consultaStatus(herramienta.proximaCalibracion),
             "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
-            "Acciones": <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
+            "Acciones": (
+                <>
+                <Link to={`/sistema/herramienta/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
+                <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
+                </>
+            )
         }));
 
     const options = {

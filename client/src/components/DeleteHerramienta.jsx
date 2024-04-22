@@ -26,7 +26,9 @@ const DeleteHerramienta = ({ herramientaId, identificacion, successCallback }) =
     }
 
     return (
-        <button onClick={() => deleteHerramienta(herramientaId, identificacion)} className="btn btn-outline-danger btn-sm">DELETE</button>
+        <button onClick={() => deleteHerramienta(herramientaId, identificacion)} className="btn btn-outline-danger btn-sm">
+              <i className="fa fa-trash"></i>
+        </button>
     )
 }
 
