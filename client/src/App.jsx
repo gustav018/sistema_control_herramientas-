@@ -53,7 +53,7 @@ const App = () => {
                     <Route path="listar" element={<Listar />} />
                     <Route path="herramientas/list" element={<ListarHerramienta />} />
                     <Route path="pdf" element={<ReporteIso />} />
-                    <Route path="reporte" element={<Reporte />} />
+                    <Route path="herramientas/reporte" element={<Reporte />} />
                     <Route path="herramientas/nuevo" element={<CrearHerramienta />} />
                     <Route path="herramientas/update/:id" element={<HerramientasFormUpdate />} />
                       {/* Fin ruta herramientas */}

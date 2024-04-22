@@ -120,7 +120,7 @@ const Reporte = () => {
       <SubMenu>
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 className="h3 mb-0 text-gray-800">Generating PDF...</h1>
-          <Link to="/sistema/list" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" rel="noopener noreferrer"><i className="fas fa-arrow-left fa-sm text-white-50" /> Back to Home</Link>
+          <Link to="/sistema/herramientas/list" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" rel="noopener noreferrer"><i className="fas fa-arrow-left fa-sm text-white-50" /> Back to Home</Link>
         </div>
       </SubMenu>
 

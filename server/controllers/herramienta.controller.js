@@ -21,7 +21,7 @@ module.exports = {
     
     getOneHerramientaById: (req, res) => {
         HerramientaModel.findOne({ _id: req.params.id })
-            .populate("colaboradorId", "nombre apellido sucursal -_id")
+            .populate("colaboradorId", "nombre apellido sucursal id")
             .populate("userId", "firstName lastName sucursal _id")
             .then((oneSingleHerramienta) => res.status(200).json({ herramienta: oneSingleHerramienta }))
             .catch((err) =>
