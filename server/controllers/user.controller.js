@@ -39,6 +39,7 @@ module.exports = {
                                     firstName: user.firstName,
                                     lastName: user.lastName,
                                     email: user.email,
+                                    sucursal: user.sucursal
                                 };
                                 console.log("userInfo: ", userInfo);
 

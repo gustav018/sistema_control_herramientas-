@@ -168,7 +168,7 @@ const ListarHerramienta = () => {
             return (
                 <TableRow>
                     <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={colSpan}>
-                        <Collapse in={expandedRow} timeout="auto" unmountOnExit>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
 
                             <Box sx={{ margin: 1 }}>
                                 <Typography variant="h6" gutterBottom component="div" sx={{ fontWeight: 'bold' }}>

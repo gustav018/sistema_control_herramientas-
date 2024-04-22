@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
             message: "Please enter a valid email"
         }
     },
+    sucursal: {
+        type: String,
+        required: [true, "Sucursal is required"]    
+    },
     password: {
         type: String,
         required: [true, "Password is required"],

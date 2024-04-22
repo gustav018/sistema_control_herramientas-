@@ -17,8 +17,8 @@ const HerramientaSchema = new mongoose.Schema({
     },
     ubicacion: {
         type: String,
-        required: [true, "La ubicación es requerida"],
-        minlength: [3, "La ubicación debe tener al menos 3 caracteres"],
+        required: [false, "La ubicación es requerida"],
+        
     },
 
     calibradoPor: {
@@ -34,7 +34,7 @@ const HerramientaSchema = new mongoose.Schema({
     },
 
     frecuencia: {
-        type: Number,
+        type: String,
         required: [true, "La frecuencia es requerida"],
         minlength: [3, "La frecuencia debe tener al menos 3 caracteres"],
     },

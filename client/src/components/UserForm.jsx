@@ -21,6 +21,7 @@ const UserForm = ({formType}) => {
         ...(formType === 'registro' && {
             firstName: Yup.string().required('Nombre es requerido'),
             lastName: Yup.string().required('Apellido es requerido'),
+            sucursal: Yup.string().required('Sucursal es requerido'),
             confirmPassword: Yup.string()
                 .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
                 .required('Confirmar contraseña es requerido'),
@@ -104,6 +105,17 @@ const UserForm = ({formType}) => {
                     <div className="mb-3">
                         <Field type="email" name="email" className="form-control" placeholder="Email" />
                         <ErrorMessage name="email" component="div" className="text-danger" />
+                    </div>
+                    <div className="mb-3">
+                        <Field as="select" name="sucursal" className="form-select" placeholder="Sucursal">
+                            <option value="">Selecciona una sucursal</option>
+                            <option value="Sucursal Madame Lynch">ML</option>
+                            <option value="SUCURSAL Encarnacion">ENC</option>
+                            <option value="SUCURSAL Katuete">KAT</option>
+                            <option value="SUCURSAL Ciudad del Este">CDE</option>
+                            <option value="SUCURSAL Loma Plata">LP</option>
+                        </Field>
+                        <ErrorMessage name="sucursal" component="div" className="text-danger" />
                     </div>
                     <div className="mb-3">
                         <Field type="password" name="password" className="form-control" placeholder="password" />
