@@ -1,6 +1,6 @@
 import axios from "axios";
 import SubMenu from "../SubMenu"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -10,8 +10,14 @@ import ColaboradorSelect from "../Colaboradores/ColaboradorSelect";
 
 
 const CrearHerramienta = () => {
+  const [totalHerramientas, setTotalHerramientas] = useState(0);
+
+  // Hacer una solicitud al backend para obtener los datos de todas las herramientas
+  const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("http://localhost:8000/api/herramienta");
 
   const navigate = useNavigate();
+  const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
+  const idUsuario = idUsuarioLogin();
 
   const initialValues = {
     identificacion: '',
@@ -22,10 +28,79 @@ const CrearHerramienta = () => {
     ultimaCalibracion: '',
     proximaCalibracion: '',
     colaboradorId: '',
-    userId: ''
+    userId: idUsuario
   }
   const { values: herramienta, handleChange, clearData } = useForm(initialValues)
   const [error, setError] = useState("")
+
+  useEffect(() => {
+    if (herramienta.descripcion) {
+      const identificacion = transformDescriptionToIdentificacion(herramienta.descripcion);
+      handleChange({ target: { name: 'identificacion', value: identificacion } });
+    }
+    if (herramienta.ultimaCalibracion && herramienta.frecuencia) {
+      const ultimaCalibracionDate = new Date(herramienta.ultimaCalibracion);
+      const frecuenciaDays = calculateFrecuenciaInDays(herramienta.frecuencia);
+      ultimaCalibracionDate.setDate(ultimaCalibracionDate.getDate() + frecuenciaDays);
+      
+      const proximaCalibracion = ultimaCalibracionDate.toISOString().split('T')[0];
+      handleChange({ target: { name: 'proximaCalibracion', value: proximaCalibracion } });
+    }
+    if (!isLoadingHerramientas && herramientasData) {
+      setTotalHerramientas(herramientasData.length);
+    }
+  }, [herramienta.descripcion, herramienta.ultimaCalibracion, herramienta.frecuencia, isLoadingHerramientas, herramientasData]);
+  
+  
+  const transformDescriptionToIdentificacion = (description) => {
+    // Convertir la descripción a mayúsculas
+    const upperCaseDescription = description.toUpperCase();
+    // Separar la descripción en palabras
+    const words = upperCaseDescription.split(' ');
+    // Filtrar palabras de dos caracteres
+    const filteredWords = words.filter(word => word.length > 2);
+    // Construir la identificación usando la primera letra de cada palabra
+    let identificacion = '';
+    filteredWords.forEach((word, index) => {
+      // Agregar la primera letra de cada palabra, seguida de un guión, excepto para la última palabra
+      if (index < filteredWords.length - 1) {
+        identificacion += word.charAt(0) + '';
+      } else {
+        // Para la última palabra, solo agregar la primera letra
+        identificacion += word.charAt(0);
+      }
+      
+    });
+    // Agregar un sufijo estático o lógica adicional para completar la identificación
+    // En este ejemplo, simplemente agrego "-TR-00"
+    identificacion += `-TR-00${totalHerramientas}`;
+    return identificacion;
+  };
+  
+  
+
+  const calculateFrecuenciaInDays = (frecuencia) => {
+    switch (frecuencia) {
+      case 'diario':
+        return 1;
+      case 'semanal':
+        return 7;
+      case 'quincenal':
+        return 15;
+      case 'mensual':
+        return 30;
+      case 'trimestral':
+        return 90;
+      case 'semestral':
+        return 180;
+      case 'anual':
+        return 365;
+      case 'anio_y_medio':
+        return ((365 / 2)+365);
+      default:
+        return 0;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -56,13 +131,10 @@ const CrearHerramienta = () => {
   }
   const { data, isLoading } = useAxios("http://localhost:8000/api/colaborador");
 
-
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
-    const idUsuario = idUsuarioLogin();
+
   return (
     <>
       <SubMenu>
@@ -70,26 +142,32 @@ const CrearHerramienta = () => {
           <h2 className="h4 text-gray-900 mb-4">Crear herramienta</h2>
           <div className="text-danger">{error}</div>
           <div className="form-group row">
-            <div className="col-sm-6 mb-3 mb-sm-0">
-              <input type="text" className="form-control form-control-user" id="identificacion" placeholder="Identificación" name="identificacion" value={herramienta.identificacion} onChange={handleChange} required minLength={3} />
-            </div>
-            <div className="col-sm-6">
+          <div className="col-sm-6 mb-3 mb-sm-0">
+              <label htmlFor="descripcion">Descripción</label>
               <input type="text" className="form-control form-control-user" id="descripcion" placeholder="Descripción" name="descripcion" value={herramienta.descripcion} onChange={handleChange} required minLength={3} />
             </div>
+            <div className="col-sm-6">
+              <label htmlFor="identificacion">Identificación</label>
+              <input type="text" className="form-control form-control-user" id="identificacion" placeholder="Identificación" name="identificacion" value={herramienta.identificacion} onChange={handleChange} required minLength={3} />
+            </div>
+            
           </div>
 
           <div className="form-group row">
             <div className="col-sm-6 mb-3 mb-sm-0">
+              <label htmlFor="calibradoPor">Calibrado Por</label>
               <input type="text" className="form-control form-control-user" id="calibradoPor" placeholder="Calibrado Por" name="calibradoPor" value={herramienta.calibradoPor} onChange={handleChange} required minLength={3} />
             </div>
             <div className="col-sm-6">
+              <label htmlFor="certificado">Certificado</label>
               <input type="text" className="form-control form-control-user" id="certificado" placeholder="Certificado" name="certificado" value={herramienta.certificado} onChange={handleChange} required minLength={3} />
             </div>
           </div>
           <div className="form-group row">
+           
             <div className="col-sm-6 mb-3 mb-sm-0">
               <label htmlFor="frecuencia">Frecuencia</label>
-              <select className="form-select form-control-user" id="frecuencia" style={{ width: "93%" }} name="frecuencia" value={herramienta.frecuencia} onChange={handleChange} required>
+              <select className="form-select form-control-user" id="frecuencia" name="frecuencia" onChange={handleChange} required>
                 <option value="">Selecciona una opción</option>
                 <option value="diario">Diario</option>
                 <option value="semanal">Semanal</option>
@@ -102,7 +180,7 @@ const CrearHerramienta = () => {
               </select>
             </div>
             <div className="col-sm-6">
-              <label htmlFor="ultimaCalibracion"> colaboradorId </label>
+              <label htmlFor="colaboradorId"> colaboradorId </label>
 
               <select className="form-select form-control-user" id="colaboradorId" style={{ width: "93%" }} name="colaboradorId" value={herramienta.colaboradorId} onChange={handleChange} required>
                 <option value="">Selecciona una opción</option>
@@ -129,7 +207,7 @@ const CrearHerramienta = () => {
           </div>
           <div className="form-group">
 
-            <input type="text" className="form-control form-control-user" id="userId" placeholder="User Id" name="userId" value={idUsuario} onChange={handleChange} required disabled/>
+            <input type="text" className="form-control form-control-user" id="userId" placeholder="User Id" name="userId" value={herramienta.userId} onChange={handleChange} style={{ display: 'none' }} required />
           </div>
           <button type="submit" className="btn btn-primary btn-user btn-block">Registrar Herramienta</button>
           <ColaboradorSelect />
