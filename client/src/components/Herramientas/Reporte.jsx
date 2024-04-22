@@ -6,16 +6,13 @@ import SubMenu from '../SubMenu';
 import { Link } from 'react-router-dom';
 
 const Reporte = () => {
-  const { data: datos, isLoading, error } = useAxios("http://localhost:8000/api/herramienta");
 
 
+  const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
+  const idUsuario = idUsuarioLogin();
+  console.log(idUsuario)
 
-
-  const getNombreColaborador = (_id) => {
-    //const { data: datosColaborador } = useAxios(`http://localhost:8000/api/colaborador/${_id}`);
-    return `Juan Perez`;
-  }
-
+  const { data: datos, isLoading, error } = useAxios("http://localhost:8000/api/herramienta/user/" + idUsuario);
 
   useEffect(() => {
 
@@ -42,17 +39,10 @@ const Reporte = () => {
     }
 
     // Table data
-    const idUsuarioLogin = () => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user) {
-        return `${user._id}`;
-      }
-    };
-    const idUsuario = idUsuarioLogin();
+
     const tableData = datos
-      .filter(herramienta => herramienta.userId.trim() === idUsuario)
       .map(herramienta => [herramienta.identificacion,
-      herramienta.ubicacion,
+      herramienta.userId.sucursal,
       herramienta.calibradoPor,
       herramienta.certificado,
       herramienta.frecuencia,

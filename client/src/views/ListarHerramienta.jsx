@@ -9,12 +9,11 @@ import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, Table
 import { NavLink } from "react-router-dom";
 
 const ListarHerramienta = () => {
-    const idUsuarioLogin = () => 
-        JSON.parse(localStorage.getItem('user'))?._id || ''; 
+    const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
     const idUsuario = idUsuarioLogin();
-    console.log(idUsuario);
 
-    const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta/user/"+idUsuario);
+
+    const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta/user/" + idUsuario);
 
     if (error) {
         return <div>{error.message}</div>;
@@ -58,7 +57,7 @@ const ListarHerramienta = () => {
         );
     };
 
-   
+
 
     const columns = [
         {
@@ -164,7 +163,7 @@ const ListarHerramienta = () => {
         },
     ];
 
-   
+
     const datos = data
         .map((herramienta, index) => ({
             id: index,
@@ -176,71 +175,71 @@ const ListarHerramienta = () => {
             "Proxima Calibración": formatDate(herramienta.proximaCalibracion),
             "Dias para Vencimiento": consultaVencimineto(herramienta.proximaCalibracion),
             "Status": consultaStatus(herramienta.proximaCalibracion),
-            "Responsable":`${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
+            "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
             "Acciones": <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
         }));
 
-        const options = {
-            filterType: 'checkbox',
-            expandableRows: true,
-            renderExpandableRow: (rowData) => {
-                const colSpan = rowData.length + 1;
-                return (
-                    <TableRow>
-                        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={colSpan}>
-                            <Collapse in={open} timeout="auto" unmountOnExit>
-                                <Box sx={{ margin: 1 }}>
-                                    <Typography variant="h6" gutterBottom component="div" sx={{ fontWeight: 'bold' }}>
-                                        Detalles
-                                    </Typography>
-                                    <Table size="small" aria-label="purchases">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell sx={{ fontWeight: 'bold' }}>Responsable</TableCell>
-                                                <TableCell sx={{ fontWeight: 'bold' }}>Ubicacion</TableCell>
-                                                <TableCell sx={{ fontWeight: 'bold' }}>Calibrado por</TableCell>
-                                                <TableCell sx={{ fontWeight: 'bold' }}>Fecha de Calibración</TableCell>
-                                                <TableCell sx={{ fontWeight: 'bold' }}>Proxima Calibración</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell component="th" scope="row">
-                                                    {rowData[8]}
-                                                </TableCell>
-                                                <TableCell>{rowData[2]}</TableCell>
-                                                <TableCell>{rowData[3]}</TableCell>
-                                                <TableCell>{rowData[4]}</TableCell>
-                                                <TableCell>{rowData[5]}</TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    </Table>
-                                </Box>
-                            </Collapse>
-                        </TableCell>
-                    </TableRow>
-                );
-            },
-            customSort: (data, colIndex, order) => {
-                // Sort the data based on the "Status" column (index 7)
-                if (colIndex === 7) {
-                    return data.sort((a, b) => {
-                        if (order === 'asc') {
-                            return a.data[colIndex].localeCompare(b.data[colIndex]);
-                        } else {
-                            return b.data[colIndex].localeCompare(a.data[colIndex]);
-                        }
-                    });
-                }
-                return data;
-            },
-            sortOrder: {
-                name: 'Status', // Sort by the "Status" column
-                direction: 'asc', // Sort in ascending order
-            },
-            sort: true, // Enable sorting
-        };
-        
+    const options = {
+        filterType: 'checkbox',
+        expandableRows: true,
+        renderExpandableRow: (rowData) => {
+            const colSpan = rowData.length + 1;
+            return (
+                <TableRow>
+                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={colSpan}>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <Box sx={{ margin: 1 }}>
+                                <Typography variant="h6" gutterBottom component="div" sx={{ fontWeight: 'bold' }}>
+                                    Detalles
+                                </Typography>
+                                <Table size="small" aria-label="purchases">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell sx={{ fontWeight: 'bold' }}>Responsable</TableCell>
+                                            <TableCell sx={{ fontWeight: 'bold' }}>Ubicacion</TableCell>
+                                            <TableCell sx={{ fontWeight: 'bold' }}>Calibrado por</TableCell>
+                                            <TableCell sx={{ fontWeight: 'bold' }}>Fecha de Calibración</TableCell>
+                                            <TableCell sx={{ fontWeight: 'bold' }}>Proxima Calibración</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell component="th" scope="row">
+                                                {rowData[8]}
+                                            </TableCell>
+                                            <TableCell>{rowData[2]}</TableCell>
+                                            <TableCell>{rowData[3]}</TableCell>
+                                            <TableCell>{rowData[4]}</TableCell>
+                                            <TableCell>{rowData[5]}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </Box>
+                        </Collapse>
+                    </TableCell>
+                </TableRow>
+            );
+        },
+        customSort: (data, colIndex, order) => {
+            // Sort the data based on the "Status" column (index 7)
+            if (colIndex === 7) {
+                return data.sort((a, b) => {
+                    if (order === 'asc') {
+                        return a.data[colIndex].localeCompare(b.data[colIndex]);
+                    } else {
+                        return b.data[colIndex].localeCompare(a.data[colIndex]);
+                    }
+                });
+            }
+            return data;
+        },
+        sortOrder: {
+            name: 'Status', // Sort by the "Status" column
+            direction: 'asc', // Sort in ascending order
+        },
+        sort: true, // Enable sorting
+    };
+
     return (
         <SubMenu>
 
@@ -251,7 +250,7 @@ const ListarHerramienta = () => {
             <div className="row">
                 {/* Earnings (Monthly) Card Example */}
                 <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-primary shadow h-100 py-2" style={{padding: '32px'} }>
+                    <div className="card border-left-primary shadow h-100 py-2" style={{ padding: '32px' }}>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
@@ -268,7 +267,7 @@ const ListarHerramienta = () => {
                 </div>
                 {/* Earnings (Monthly) Card Example */}
                 <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2" style={{padding: '32px'} }>
+                    <div className="card border-left-success shadow h-100 py-2" style={{ padding: '32px' }}>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
@@ -287,7 +286,7 @@ const ListarHerramienta = () => {
 
                 {/* Pending Requests Card Example */}
                 <div className="col-xl-4 col-md-6 mb-4">
-                    <div className="card border-left-warning shadow h-100 py-2" style={{padding: '32px'} }>
+                    <div className="card border-left-warning shadow h-100 py-2" style={{ padding: '32px' }}>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
