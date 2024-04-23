@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser'); // to be able to read cookies
 require('dotenv').config();
 
 console.log(process.env.TEST)
-
+console.log("hsdfsdf")
 app.use(cookieParser());
 
 const corsOptions = {

@@ -5,13 +5,12 @@ const Aside = () => {
         <>
             <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 {/* Sidebar - Brand */}
-                <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/sistema/herramientas/list">
                     <div className="sidebar-brand-icon rotate-n-15">
-                        <i className="fas fa-laugh-wink" />
+                        
                     </div>
-                    <div className="sidebar-brand-text mx-3">SB Admin
-                        <sup>2</sup></div>
-                </a>
+                    <div className="sidebar-brand-text mx-3">Control de herramientas</div>
+                </Link>
                 {/* Divider */}
                 <hr className="sidebar-divider my-0" />
                 {/* Nav Item - Dashboard */}
@@ -75,9 +74,8 @@ const Aside = () => {
                     </a>
                     <div id="collapsePages" className="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
-                            <NavLink to="/sistema/reporte" className="collapse-item" >Reporte Formato ISO</NavLink>
-                            <NavLink to="sistema/reporte" className="collapse-item" >Reporte Formato ISO</NavLink>
-                            <a className="collapse-item" href="reporte">Reporte de Vencidos</a>
+                            <NavLink to="/sistema/herramientas/reporte" className="collapse-item" >Reporte Formato ISO</NavLink>
+                            
 
                         </div>
                     </div>

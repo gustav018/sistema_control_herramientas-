@@ -41,7 +41,7 @@ const CrearHerramienta = () => {
       const ultimaCalibracionDate = new Date(herramienta.ultimaCalibracion);
       const frecuenciaDays = calculateFrecuenciaInDays(herramienta.frecuencia);
       ultimaCalibracionDate.setDate(ultimaCalibracionDate.getDate() + frecuenciaDays);
-      
+
       const proximaCalibracion = ultimaCalibracionDate.toISOString().split('T')[0];
       handleChange({ target: { name: 'proximaCalibracion', value: proximaCalibracion } });
     }
@@ -49,8 +49,8 @@ const CrearHerramienta = () => {
       setTotalHerramientas(herramientasData.length);
     }
   }, [herramienta.descripcion, herramienta.ultimaCalibracion, herramienta.frecuencia, isLoadingHerramientas, herramientasData]);
-  
-  
+
+
   const transformDescriptionToIdentificacion = (description) => {
     const upperCaseDescription = description.toUpperCase();
     const words = upperCaseDescription.split(' ');
@@ -62,13 +62,13 @@ const CrearHerramienta = () => {
       } else {
         identificacion += word.charAt(0);
       }
-      
+
     });
     identificacion += `-TR-00${totalHerramientas}`;
     return identificacion;
   };
-  
-  
+
+
 
   const calculateFrecuenciaInDays = (frecuencia) => {
     switch (frecuencia) {
@@ -87,7 +87,7 @@ const CrearHerramienta = () => {
       case 'anual':
         return 365;
       case 'anio_y_medio':
-        return ((365 / 2)+365);
+        return ((365 / 2) + 365);
       default:
         return 0;
     }
@@ -133,7 +133,7 @@ const CrearHerramienta = () => {
           <h2 className="h4 text-gray-900 mb-4">Crear herramienta</h2>
           <div className="text-danger">{error}</div>
           <div className="form-group row">
-          <div className="col-sm-6 mb-3 mb-sm-0">
+            <div className="col-sm-6 mb-3 mb-sm-0">
               <label htmlFor="descripcion">Descripción</label>
               <input type="text" className="form-control form-control-user" id="descripcion" placeholder="Descripción" name="descripcion" value={herramienta.descripcion} onChange={handleChange} required minLength={3} />
             </div>
@@ -141,7 +141,7 @@ const CrearHerramienta = () => {
               <label htmlFor="identificacion">Identificación</label>
               <input type="text" className="form-control form-control-user" id="identificacion" placeholder="Identificación" name="identificacion" value={herramienta.identificacion} onChange={handleChange} required minLength={3} />
             </div>
-            
+
           </div>
 
           <div className="form-group row">
@@ -155,10 +155,10 @@ const CrearHerramienta = () => {
             </div>
           </div>
           <div className="form-group row">
-           
+
             <div className="col-sm-6 mb-3 mb-sm-0">
               <label htmlFor="frecuencia">Frecuencia</label>
-              <select className="form-select form-control-user" id="frecuencia" name="frecuencia" onChange={handleChange} required>
+              <select className="form-select form-control-user" id="frecuencia" name="frecuencia" onChange={handleChange} value={herramienta.frecuencia} required>
                 <option value="">Selecciona una opción</option>
                 <option value="diario">Diario</option>
                 <option value="semanal">Semanal</option>

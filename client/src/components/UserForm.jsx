@@ -104,10 +104,10 @@ const UserForm = ({formType}) => {
                         <Field as="select" name="sucursal" className="form-select" placeholder="Sucursal">
                             <option value="">Selecciona una sucursal</option>
                             <option value="Sucursal Madame Lynch">ML</option>
-                            <option value="SUCURSAL Encarnacion">ENC</option>
-                            <option value="SUCURSAL Katuete">KAT</option>
-                            <option value="SUCURSAL Ciudad del Este">CDE</option>
-                            <option value="SUCURSAL Loma Plata">LP</option>
+                            <option value="Sucursal Encarnacion">ENC</option>
+                            <option value="Sucursal Katuete">KAT</option>
+                            <option value="Sucursal Ciudad del Este">CDE</option>
+                            <option value="Sucursal Loma Plata">LP</option>
                         </Field>
                         <ErrorMessage name="sucursal" component="div" className="text-danger" />
                     </div>
