@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import useAxios from "../../hooks/useAxios";
-import ColaboradorSelect from "../Colaboradores/ColaboradorSelect";
+
 
 
 const CrearHerramienta = () => {
@@ -141,9 +141,7 @@ const CrearHerramienta = () => {
               <label htmlFor="identificacion">Identificación</label>
               <input type="text" className="form-control form-control-user" id="identificacion" placeholder="Identificación" name="identificacion" value={herramienta.identificacion} onChange={handleChange} required minLength={3} />
             </div>
-
           </div>
-
           <div className="form-group row">
             <div className="col-sm-6 mb-3 mb-sm-0">
               <label htmlFor="calibradoPor">Calibrado Por</label>
@@ -155,7 +153,6 @@ const CrearHerramienta = () => {
             </div>
           </div>
           <div className="form-group row">
-
             <div className="col-sm-6 mb-3 mb-sm-0">
               <label htmlFor="frecuencia">Frecuencia</label>
               <select className="form-select form-control-user" id="frecuencia" name="frecuencia" onChange={handleChange} value={herramienta.frecuencia} required>
@@ -171,8 +168,7 @@ const CrearHerramienta = () => {
               </select>
             </div>
             <div className="col-sm-6">
-              <label htmlFor="colaboradorId"> colaboradorId </label>
-
+              <label htmlFor="colaboradorId"> Colaborador </label>
               <select className="form-select form-control-user" id="colaboradorId" style={{ width: "93%" }} name="colaboradorId" value={herramienta.colaboradorId} onChange={handleChange} required>
                 <option value="">Selecciona una opción</option>
                 {data.map(colaborador => (
@@ -181,30 +177,23 @@ const CrearHerramienta = () => {
                   </option>
                 ))}
               </select>
-
             </div>
           </div>
           <div className="form-group row">
             <div className="col-sm-6">
               <label htmlFor="ultimaCalibracion"> Ultima Calibración </label>
               <input type="date" className="form-control form-control-user" id="ultimaCalibracion" placeholder="Fecha de Ultima Calibración" name="ultimaCalibracion" value={herramienta.ultimaCalibracion} onChange={handleChange} required />
-
             </div>
-
             <div className="col-sm-6">
               <label htmlFor="proximaCalibracion"> Proximo Calibración </label>
               <input type="date" className="form-control " id="proximaCalibracion" placeholder="Fecha de Proximo Calibración" name="proximaCalibracion" value={herramienta.proximaCalibracion} onChange={handleChange} required />
             </div>
           </div>
           <div className="form-group">
-
             <input type="text" className="form-control form-control-user" id="userId" placeholder="User Id" name="userId" value={herramienta.userId} onChange={handleChange} style={{ display: 'none' }} required />
           </div>
           <button type="submit" className="btn btn-primary btn-user btn-block">Registrar Herramienta</button>
-          <ColaboradorSelect />
         </form>
-
-
       </SubMenu>
 
     </>

@@ -12,22 +12,22 @@ const Inicio = () => {
             <div>
                 <div id="wrapper">
                     {/* Sidebar */}
-                    <Aside/>
+                    <Aside />
                     {/* End of Sidebar */}
                     {/* Content Wrapper */}
                     <div id="content-wrapper" className="d-flex flex-column">
                         {/* Main Content */}
                         <div id="content">
-                        <NavBar/>
-                        <div className="container-fluid">
+                            <NavBar />
+                            <div className="container-fluid">
                                 {/* Page Heading */}
-                                <ListarHerramienta   />
+                                <ListarHerramienta />
                             </div>
                             {/* /.container-fluid */}
                         </div>
                         {/* End of Main Content */}
                         {/* Footer */}
-                        <Footer/>
+                        <Footer />
                         {/* End of Footer */}
                     </div>
                     {/* End of Content Wrapper */}
@@ -38,7 +38,7 @@ const Inicio = () => {
                     <i className="fas fa-angle-up" />
                 </a>
                 {/* Logout Modal*/}
-               
+
             </div>
 
 

@@ -4,14 +4,13 @@ import { useState, useEffect } from "react";
 import useForm from "../../hooks/useForm";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-
 import useAxios from "../../hooks/useAxios";
-import ColaboradorSelect from "../Colaboradores/ColaboradorSelect";
+
 
 
 const HerramientasFormUpdate = () => {
     const { id } = useParams();
-   
+
 
     const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("http://localhost:8000/api/herramienta");
 
@@ -35,7 +34,7 @@ const HerramientasFormUpdate = () => {
     const [error, setError] = useState("")
 
     useEffect(() => {
-        
+
         if (herramienta.ultimaCalibracion && herramienta.frecuencia) {
             const ultimaCalibracionDate = new Date(herramienta.ultimaCalibracion);
             const frecuenciaDays = calculateFrecuenciaInDays(herramienta.frecuencia);
@@ -44,7 +43,7 @@ const HerramientasFormUpdate = () => {
             const proximaCalibracion = ultimaCalibracionDate.toISOString().split('T')[0];
             handleChange({ target: { name: 'proximaCalibracion', value: proximaCalibracion } });
         }
-       
+
         axios.get(`http://localhost:8000/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
             .then(res => {
                 console.log(res.data.herramienta)
@@ -61,10 +60,10 @@ const HerramientasFormUpdate = () => {
                 })
             })
             .catch(err => console.log(err))
-    }, [ isLoadingHerramientas, herramientasData, id, setValues]);
+    }, [isLoadingHerramientas, herramientasData, id, setValues]);
 
     const formatDate = (dateString) => {
-        if (!dateString) return ''; 
+        if (!dateString) return '';
         const dateObject = new Date(dateString);
         const year = dateObject.getFullYear();
         let month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
@@ -166,7 +165,7 @@ const HerramientasFormUpdate = () => {
                             </select>
                         </div>
                         <div className="col-sm-6">
-                            <label htmlFor="colaboradorId"> colaboradorId </label>
+                            <label htmlFor="colaboradorId"> Colaborador </label>
 
                             <select className="form-select form-control-user" id="colaboradorId" style={{ width: "93%" }} name="colaboradorId" value={herramienta.colaboradorId} onChange={handleChange} required>
                                 <option value="">Selecciona una opción</option>
@@ -196,7 +195,7 @@ const HerramientasFormUpdate = () => {
 
                     </div>
                     <button type="submit" className="btn btn-primary btn-user btn-block">Actualizar Herramienta</button>
-                    <ColaboradorSelect />
+
                 </form>
 
 

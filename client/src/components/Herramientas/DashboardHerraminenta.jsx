@@ -66,7 +66,7 @@ const DashboardHerraminenta = () => {
                                     </div>
                                 </div>
                                 <div className="col-auto">
-                                    <Link to="/sistema/herramientas/list" className="btn btn-primary ml-2">
+                                    <Link to="/sistema/herramientas/vencidas" className="btn btn-primary ml-2">
                                         <span className="ml-2">Ver detalle</span>
                                     </Link>
                                 </div>

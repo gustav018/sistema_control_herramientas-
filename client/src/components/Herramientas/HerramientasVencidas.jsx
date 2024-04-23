@@ -29,11 +29,11 @@ const HerramientasVencidas = () => {
     }
 
     return (
-       <>
-       {totalHerramientasVencidas}
-       </>
-            
-        
+        <>
+            {totalHerramientasVencidas}
+        </>
+
+
     );
 };
 

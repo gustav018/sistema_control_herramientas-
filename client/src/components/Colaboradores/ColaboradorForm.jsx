@@ -9,15 +9,15 @@ import { useNavigate } from "react-router-dom";
 
 const ColaboradorForm = () => {
     const navigate = useNavigate();
-{/* nombre, apellido, cedula, email, celular */}
+    {/* nombre, apellido, cedula, email, celular */ }
     const initialValues = {
-        nombre:'',
+        nombre: '',
         apellido: '',
         cedula: "",
         email: "",
         celular: ""
     }
-    const {values: colaborador, handleChange, clearData} = useForm(initialValues)
+    const { values: colaborador, handleChange, clearData } = useForm(initialValues)
     const [error, setError] = useState("")
 
     const handleSubmit = (e) => {
@@ -54,26 +54,26 @@ const ColaboradorForm = () => {
             <div className="text-danger">{error}</div>
             <div className="form-group row">
                 <div className="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" className="form-control form-control-user" name="nombre" value={colaborador.nombre} onChange={handleChange} placeholder="Nombre" required minLength={3} />
+                    <input type="text" className="form-control " name="nombre" value={colaborador.nombre} onChange={handleChange} placeholder="Nombre" required minLength={3} />
                 </div>
                 <div className="col-sm-6">
-                    <input type="text" className="form-control form-control-user" name="apellido" value={colaborador.apellido} onChange={handleChange} placeholder="Apellido" required minLength={3} />
+                    <input type="text" className="form-control " name="apellido" value={colaborador.apellido} onChange={handleChange} placeholder="Apellido" required minLength={3} />
                 </div>
             </div>
             <div className="form-group row">
                 <div className="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" className="form-control form-control-user" name="cedula" value={colaborador.cedula} onChange={handleChange} placeholder="Cedula" required minLength={3} />
+                    <input type="text" className="form-control " name="cedula" value={colaborador.cedula} onChange={handleChange} placeholder="Cedula" required minLength={3} />
                 </div>
                 <div className="col-sm-6">
-                    <input type="email" className="form-control form-control-user" name="email" value={colaborador.email} onChange={handleChange} placeholder="Email" required minLength={3} />
+                    <input type="email" className="form-control " name="email" value={colaborador.email} onChange={handleChange} placeholder="Email" required minLength={3} />
                 </div>
             </div>
             <div className="form-group row">
                 <div className="col-sm-6 mb-3 mb-sm-0">
-                    <input type="tel" className="form-control form-control-user" name="celular" value={colaborador.celular} onChange={handleChange} placeholder="Celular" required minLength={3} />
+                    <input type="tel" className="form-control " name="celular" value={colaborador.celular} onChange={handleChange} placeholder="Celular" required minLength={3} />
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary btn-user btn-block">Registrar Colaborador</button>
+            <button type="submit" className="btn btn-primary btn-block">Registrar Colaborador</button>
         </form>
     )
 }

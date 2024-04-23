@@ -1,9 +1,9 @@
 /// total herramientas por usuario
-import{ useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useAxios from "../../hooks/useAxios";
 
 const TotalHerramientas = () => {
-   
+
     const [totalHerramientas, setTotalHerramientas] = useState(0);
 
     const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';

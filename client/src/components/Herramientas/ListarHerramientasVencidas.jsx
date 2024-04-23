@@ -1,22 +1,21 @@
 
-import DeleteHerramienta from "../components/DeleteHerramienta";
-import SubMenu from "../components/SubMenu";
-import useAxios from "../hooks/useAxios";
 import MUIDataTable from "mui-datatables";
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, TableBody } from '@mui/material';
 
-import DashboardHerraminenta from "../components/Herramientas/DashboardHerraminenta";
-import { Link } from "react-router-dom";
 
-const ListarHerramienta = () => {
+import { Link } from "react-router-dom";
+import DeleteHerramienta from "../DeleteHerramienta";
+import SubMenu from "../SubMenu";
+import useAxios from "../../hooks/useAxios";
+import DashboardHerraminenta from "./DashboardHerraminenta";
+
+const ListarHerramientasVencidas = () => {
     const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
     const idUsuario = idUsuarioLogin();
 
-
     const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/herramienta/user/" + idUsuario);
-
 
     if (error) {
         return <div>{error.message}</div>;
@@ -61,14 +60,12 @@ const ListarHerramienta = () => {
     };
 
 
-
     const columns = [
         {
             name: "Identificacion",
             options: {
                 filter: false,
                 sort: true,
-
             },
         },
         {
@@ -91,7 +88,6 @@ const ListarHerramienta = () => {
             options: {
                 display: false,
                 filter: false,
-
             }
         },
         {
@@ -99,8 +95,6 @@ const ListarHerramienta = () => {
             options: {
                 display: false,
                 sort: true,
-
-
             }
         },
         {
@@ -114,7 +108,6 @@ const ListarHerramienta = () => {
                 filter: false,
                 sort: true,
                 sortOrder: 'asc',
-
             },
         },
         {
@@ -124,7 +117,6 @@ const ListarHerramienta = () => {
                 sort: true,
                 sortOrder: 'asc',
                 customBodyRender: (value) => formatoStatus(value),
-
             },
         },
         {
@@ -133,38 +125,36 @@ const ListarHerramienta = () => {
                 viewColumns: false,
                 filter: false,
                 display: false,
-
             }
         },
         {
             name: "Acciones",
             options: {
                 filter: false,
-
             },
         },
     ];
 
+    const herramientasVencidas = data.filter(herramienta => herramienta.proximaCalibracion && consultaStatus(herramienta.proximaCalibracion) === 'Vencido');
 
-    const datos = data
-        .map((herramienta, index) => ({
-            id: index,
-            "Identificacion": herramienta.identificacion,
-            "Descripcion": herramienta.descripcion,
-            "Ubicacion": herramienta.userId.sucursal,
-            "Calibrado por": herramienta.calibradoPor,
-            "Fecha de Calibración": formatDate(herramienta.ultimaCalibracion),
-            "Proxima Calibración": formatDate(herramienta.proximaCalibracion),
-            "Dias para Vencimiento": consultaVencimineto(herramienta.proximaCalibracion),
-            "Status": consultaStatus(herramienta.proximaCalibracion),
-            "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
-            "Acciones": (
-                <>
-                    <Link to={`/sistema/herramientas/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
-                    <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
-                </>
-            )
-        }));
+    const datos = herramientasVencidas.map((herramienta, index) => ({
+        id: index,
+        "Identificacion": herramienta.identificacion,
+        "Descripcion": herramienta.descripcion,
+        "Ubicacion": herramienta.userId.sucursal,
+        "Calibrado por": herramienta.calibradoPor,
+        "Fecha de Calibración": formatDate(herramienta.ultimaCalibracion),
+        "Proxima Calibración": formatDate(herramienta.proximaCalibracion),
+        "Dias para Vencimiento": consultaVencimineto(herramienta.proximaCalibracion),
+        "Status": consultaStatus(herramienta.proximaCalibracion),
+        "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
+        "Acciones": (
+            <>
+                <Link to={`/sistema/herramientas/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
+                <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
+            </>
+        )
+    }));
 
     const options = {
         filterType: 'checkbox',
@@ -208,23 +198,8 @@ const ListarHerramienta = () => {
                 </TableRow>
             );
         },
-        customSort: (data, colIndex, order) => {
-            // Sort the data based on the "Status" column (index 7)
-            if (colIndex === 7) {
-                return data.sort((a, b) => {
-                    if (order === 'asc') {
-                        return a.data[colIndex].localeCompare(b.data[colIndex]);
-                    } else {
-                        return b.data[colIndex].localeCompare(a.data[colIndex]);
-                    }
-                });
-            }
-            return data;
-        },
-        sortOrder: {
-            name: 'Status', // Sort by the "Status" column
-            direction: 'asc', // Sort in ascending order
-        },
+
+
         sort: true, // Enable sorting
     };
 
@@ -236,7 +211,7 @@ const ListarHerramienta = () => {
 
             <hr />
             <MUIDataTable
-                title={"Lista de Herramientas"}
+                title={"Lista de Herramientas Vencidas"}
                 data={datos}
                 columns={columns}
                 options={options}
@@ -248,4 +223,4 @@ const ListarHerramienta = () => {
     );
 };
 
-export default ListarHerramienta;
+export default ListarHerramientasVencidas;

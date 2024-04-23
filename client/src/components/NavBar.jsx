@@ -79,7 +79,7 @@ const NavBar = () => {
 
 
 
-                            <Link to="/sistema/herramientas/list" className="dropdown-item d-flex align-items-center">
+                            <Link to="/sistema/herramientas/vencidas" className="dropdown-item d-flex align-items-center">
                                 <div className="mr-3">
                                     <div className="icon-circle bg-warning">
                                         <i className="fas fa-exclamation-triangle text-white" />
@@ -95,7 +95,7 @@ const NavBar = () => {
                         </div>
                     </li>
                     {/* Nav Item - Messages */}
-                   
+
                     <div className="topbar-divider d-none d-sm-block" />
                     {/* Nav Item - User Information */}
                     <li className="nav-item dropdown no-arrow">
@@ -112,7 +112,7 @@ const NavBar = () => {
                                 <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                                 Profile
                             </a>
-                            
+
                             <div className="dropdown-divider" />
                             <button className="dropdown-item" onClick={handleLogout} >
                                 <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />

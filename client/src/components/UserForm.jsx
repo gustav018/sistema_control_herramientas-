@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { useContext } from 'react';
 
-const UserForm = ({formType}) => {
+const UserForm = ({ formType }) => {
     const { setUser } = useContext(UserContext);
 
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ const UserForm = ({formType}) => {
         resetForm();
     };
 
-    
+
     const registerUser = async (values, setErrors) => {
         try {
             await axios.post(
@@ -49,7 +49,7 @@ const UserForm = ({formType}) => {
             loginUser(values, setErrors);
         } catch (err) {
             console.log("Error: ", err.response.data);
-            setErrors({general: err.response.data.msg});
+            setErrors({ general: err.response.data.msg });
         }
     };
 
@@ -66,7 +66,7 @@ const UserForm = ({formType}) => {
             navigate("/");
         } catch (err) {
             console.log("Error: ", err.response);
-            setErrors({general: err.response.data.msg});
+            setErrors({ general: err.response.data.msg });
         }
     };
 
@@ -101,23 +101,23 @@ const UserForm = ({formType}) => {
                                 <ErrorMessage name="lastName" component="div" className="text-danger" />
                             </div>
                             <div className="mb-3">
-                        <Field as="select" name="sucursal" className="form-select" placeholder="Sucursal">
-                            <option value="">Selecciona una sucursal</option>
-                            <option value="Sucursal Madame Lynch">ML</option>
-                            <option value="Sucursal Encarnacion">ENC</option>
-                            <option value="Sucursal Katuete">KAT</option>
-                            <option value="Sucursal Ciudad del Este">CDE</option>
-                            <option value="Sucursal Loma Plata">LP</option>
-                        </Field>
-                        <ErrorMessage name="sucursal" component="div" className="text-danger" />
-                    </div>
+                                <Field as="select" name="sucursal" className="form-select" placeholder="Sucursal">
+                                    <option value="">Selecciona una sucursal</option>
+                                    <option value="Sucursal Madame Lynch">ML</option>
+                                    <option value="Sucursal Encarnacion">ENC</option>
+                                    <option value="Sucursal Katuete">KAT</option>
+                                    <option value="Sucursal Ciudad del Este">CDE</option>
+                                    <option value="Sucursal Loma Plata">LP</option>
+                                </Field>
+                                <ErrorMessage name="sucursal" component="div" className="text-danger" />
+                            </div>
                         </>
                     )}
                     <div className="mb-3">
                         <Field type="email" name="email" className="form-control" placeholder="Email" />
                         <ErrorMessage name="email" component="div" className="text-danger" />
                     </div>
-                    
+
                     <div className="mb-3">
                         <Field type="password" name="password" className="form-control" placeholder="password" />
                         <ErrorMessage name="password" component="div" className="text-danger" />

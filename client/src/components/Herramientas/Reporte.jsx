@@ -94,7 +94,7 @@ const Reporte = () => {
     autoTable(doc, {
       startY: 30, // Start from Y position 30
       theme: 'plain',
-      head: [['Identificacion','Descripcion', 'Ubicacion', 'Calibrado por', "Certificacion N°", "Frecuencia", "Ultima fecha de Caliracion", "Proxima Fecha de Calibracion", "Responsable"]], // Header row
+      head: [['Identificacion', 'Descripcion', 'Ubicacion', 'Calibrado por', "Certificacion N°", "Frecuencia", "Ultima fecha de Caliracion", "Proxima Fecha de Calibracion", "Responsable"]], // Header row
       body: tableData, // Body rows
       styles: { fillColor: [255, 255, 255], textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1 },
       headStyles: { fillColor: [255, 255, 255], textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1 },

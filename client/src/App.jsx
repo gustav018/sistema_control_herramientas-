@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import ListPlayers from './views/ListPlayers'
+
 import CrearHerramienta from './components/Herramientas/CrearHerramienta'
 import Contenedor from './components/Contenedor'
 import LoginRegister from './views/LoginRegister'
@@ -15,6 +15,7 @@ import ColaboradorForm from './components/Colaboradores/ColaboradorForm'
 import ColaboradorList from './components/Colaboradores/ColaboradorList'
 import ColaboradorFormUpdate from './components/Colaboradores/ColaboradorFormUpdate'
 import HerramientasFormUpdate from './components/Herramientas/HerramientasFormUpdate'
+import ListarHerramientasVencidas from './components/Herramientas/ListarHerramientasVencidas'
 
 const App = () => {
 
@@ -46,16 +47,17 @@ const App = () => {
                         <Contenedor />
                     </PrivateRoute>
                 }>
-                     {/* Ruta Herramientas */}
-                    <Route path="lista" element={<ListPlayers />} />
-       
+                    {/* Ruta Herramientas */}
+
+
                     <Route path="herramientas/list" element={<ListarHerramienta />} />
                     <Route path="pdf" element={<ReporteIso />} />
                     <Route path="herramientas/reporte" element={<Reporte />} />
                     <Route path="herramientas/nuevo" element={<CrearHerramienta />} />
+                    <Route path="herramientas/vencidas" element={<ListarHerramientasVencidas />} />
                     <Route path="herramientas/update/:id" element={<HerramientasFormUpdate />} />
-                      {/* Fin ruta herramientas */}
-                 
+                    {/* Fin ruta herramientas */}
+
                     {/* Ruta Colaboradores */}
                     <Route path="colaboradores/nuevo" element={<ColaboradorForm />} />
                     <Route path="colaboradores/list" element={<ColaboradorList />} />
