@@ -32,12 +32,15 @@ const ListarHerramienta = () => {
 
     const formatDate = (date) => {
         const d = new Date(date);
-        const day = d.getDate().toString().padStart(2, '0');
-        const month = (d.getMonth() + 1).toString().padStart(2, '0');
-        const year = d.getFullYear();
-        const fechaFomateada = (`${day}/${month}/${year}`);
-        return fechaFomateada;
+        const day = d.getUTCDate().toString().padStart(2, '0'); // Utiliza getUTCDate() para obtener el día del mes en UTC
+        const month = (d.getUTCMonth() + 1).toString().padStart(2, '0'); // Utiliza getUTCMonth() para obtener el mes en UTC
+        const year = d.getUTCFullYear(); // Utiliza getUTCFullYear() para obtener el año en UTC
+        const fechaFormateada = `${day}/${month}/${year}`;
+        return fechaFormateada;
     };
+    
+  
+    
 
     const consultaVencimineto = (date) => {
         const fechaProximaCalibracion = new Date(date);

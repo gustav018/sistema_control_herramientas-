@@ -2,7 +2,7 @@ import axios from "axios";
 import SubMenu from "../SubMenu"
 import { useState, useEffect } from "react";
 import useForm from "../../hooks/useForm";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
 
@@ -194,8 +194,13 @@ const HerramientasFormUpdate = () => {
 
 
                     </div>
-                    <button type="submit" className="btn btn-primary btn-user btn-block">Actualizar Herramienta</button>
-
+                    
+                    <div className="form-group row justify-content-center">
+                        <div className="col-sm-6 mb-3 mb-sm-0 text-center">
+                            <button type="submit" className="btn btn-primary  mr-3">Actualizar Herramienta</button>
+                            <Link to="/sistema/herramientas/list" className="btn btn-danger">Cancelar - Volver</Link>
+                        </div>
+                    </div>
                 </form>
 
 

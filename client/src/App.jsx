@@ -16,7 +16,7 @@ import ColaboradorList from './components/Colaboradores/ColaboradorList'
 import ColaboradorFormUpdate from './components/Colaboradores/ColaboradorFormUpdate'
 import HerramientasFormUpdate from './components/Herramientas/HerramientasFormUpdate'
 import ListarHerramientasVencidas from './components/Herramientas/ListarHerramientasVencidas'
-
+import './index.css'
 const App = () => {
 
     const userDetails = JSON.parse(localStorage.getItem("user"));
