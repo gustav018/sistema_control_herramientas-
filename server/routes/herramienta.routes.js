@@ -13,6 +13,7 @@ HerramientaRouter.put("/:id",authenticate, HerramientaController.updateOneHerram
 HerramientaRouter.patch("/:id/:game",authenticate, HerramientaController.updateGamesHerramientaById);
 HerramientaRouter.delete("/:id",authenticate, HerramientaController.deleteOneHerramientaById);
 HerramientaRouter.get("/user/:userId", authenticate, HerramientaController.getAllHerramientasByUserId);
+HerramientaRouter.get("/notificaciones/:userId", HerramientaController.getHerramientasVencidasOProximas);
 
 
 

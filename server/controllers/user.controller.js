@@ -1,6 +1,7 @@
 const { UserModel } = require('../models/user.model')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { all } = require('../routes/player.routes');
 
 module.exports = {
     register: (req, res) => {
@@ -61,5 +62,12 @@ module.exports = {
                 }
             })
             .catch(err => res.status(401).json({ error: err }));
-    }
+    },
+    allUsers: (req, res) => {
+        UserModel.find({}, { email: 1, _id: 1, firstName: 1, lastName: 1 })
+            .then((allUsers) => res.status(200).json(allUsers))
+            .catch((err) =>
+                res.status(400).json({ message: "Something went wrong", error: err })
+            );
+    },
 }
