@@ -37,14 +37,15 @@ app.use("/api/auth", UserRouter);
 
 // Configurar transporte de correo con Ethereal Mail
 const transporter = nodemailer.createTransport({
-  host: "mail.gustavofleitas.com",
-  port: 465,
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
   secure: true, // Usar SSL
   auth: {
-    user: "herramientas@gustavofleitas.com",
-    pass: "contraseña",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
+
 
 // Lista de usuarios (deberías obtener esto de tu base de datos)
 const getUsers = async () => {
@@ -57,8 +58,8 @@ const getUsers = async () => {
 // Programar tarea para enviar correos cada x tiempo 
 //(por ejemplo, cada minuto ='* * * * *' )
 const dia = 29; // Día del mes en que deseas ejecutar la tarea
-const hora = '21'; // Hora en formato de 24 horas
-const minuto = '13'; // Minuto en que deseas ejecutar la tarea
+const hora = '22'; // Hora en formato de 24 horas
+const minuto = '27'; // Minuto en que deseas ejecutar la tarea
 ////`${minuto} ${hora} ${dia} * *`
 cron.schedule(`${minuto} ${hora} ${dia} * *`, async () => {
   const users = await getUsers();
