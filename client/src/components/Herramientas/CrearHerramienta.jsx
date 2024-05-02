@@ -27,7 +27,8 @@ const CrearHerramienta = () => {
     ultimaCalibracion: '',
     proximaCalibracion: '',
     colaboradorId: '',
-    userId: idUsuario
+    userId: idUsuario,
+    observaciones: '',
   }
   const { values: herramienta, handleChange, clearData } = useForm(initialValues)
   const [error, setError] = useState("")
@@ -190,7 +191,8 @@ const CrearHerramienta = () => {
             </div>
           </div>
           <div className="form-group">
-            <input type="text" className="form-control form-control-user" id="userId" placeholder="User Id" name="userId" value={herramienta.userId} onChange={handleChange} style={{ display: 'none' }} required />
+            <input type="text" className="form-control form-control-user" id="userId" placeholder="User Id" name="userId" value={herramienta.userId} onChange={handleChange} style={{ display: "none" }} required />
+            <input type="text" className="form-control form-control-user" id="observaciones" placeholder="Observaciones" name="observaciones" value={herramienta.observaciones} onChange={handleChange} style={{ display: "none" }} />
           </div>
           <button type="submit" className="btn btn-primary btn-user btn-block">Registrar Herramienta</button>
         </form>
