@@ -78,7 +78,7 @@ const ListarHerramienta = () => {
             );
         } else if (observaciones === "En Calibracion") {
             return (
-                <Link to={`/sistema/herramientas/calibrar/${herramientaId}`}>
+                <Link to={`/sistema/herramientas/certificado/${herramientaId}`}>
                     <Chip
                         label="Actualizar Certificado"
                         color="warning"

@@ -111,7 +111,7 @@ const ActualizarCertificado = () => {
         <>
             <SubMenu>
                 <form onSubmit={handleSubmit}>
-                    <h2 className="h4 text-gray-900 mb-4">Enviar a calibración </h2>
+                    <h2 className="h4 text-gray-900 mb-4">Actualizar Certificado </h2>
                     <div className="text-danger">{error}</div>
                     <div className="form-group row">
                         <div className="col-sm-6 mb-3 mb-sm-0">
@@ -185,7 +185,7 @@ const ActualizarCertificado = () => {
 
                     <div className="form-group row justify-content-center">
                         <div className="col-sm-6 mb-3 mb-sm-0 text-center">
-                            <button type="submit" className="btn btn-primary  mr-3">Enviar a calibración</button>
+                            <button type="submit" className="btn btn-primary  mr-3">Actualizar Certificado</button>
                             <Link to="/sistema/herramientas/vencidas" className="btn btn-danger">Cancelar - Volver</Link>
                         </div>
                     </div>
