@@ -17,6 +17,8 @@ import ColaboradorFormUpdate from './components/Colaboradores/ColaboradorFormUpd
 import HerramientasFormUpdate from './components/Herramientas/HerramientasFormUpdate'
 import ListarHerramientasVencidas from './components/Herramientas/ListarHerramientasVencidas'
 import './index.css'
+import EstadoCalibracion from './components/Herramientas/EstadoCalibracion'
+import ActualizarCertificado from './components/Herramientas/ActualizarCertificado'
 const App = () => {
 
     const userDetails = JSON.parse(localStorage.getItem("user"));
@@ -55,9 +57,9 @@ const App = () => {
                     <Route path="herramientas/reporte" element={<Reporte />} />
                     <Route path="herramientas/nuevo" element={<CrearHerramienta />} />
                     <Route path="herramientas/vencidas" element={<ListarHerramientasVencidas />} />
-                    <Route path="herramientas/update/:id" element={<HerramientasFormUpdate />} />
-                    {/* Fin ruta herramientas */}
-
+                    <Route path="herramientas/update/:id" element={<HerramientasFormUpdate />} />                    {/* Fin ruta herramientas */}
+                    <Route path="herramientas/calibrar/:id" element={<EstadoCalibracion />} />
+                    <Route path="herramientas/certificado/:id" element={<ActualizarCertificado />} />
                     {/* Ruta Colaboradores */}
                     <Route path="colaboradores/nuevo" element={<ColaboradorForm />} />
                     <Route path="colaboradores/list" element={<ColaboradorList />} />

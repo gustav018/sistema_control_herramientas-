@@ -18,7 +18,7 @@ const HerramientaSchema = new mongoose.Schema({
     ubicacion: {
         type: String,
         required: [false, "La ubicación es requerida"],
-        
+
     },
 
     calibradoPor: {
@@ -61,8 +61,14 @@ const HerramientaSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+
+    observaciones: {
+        type: String,
+
+
     }
-    
+
 }, { timestamps: true });
 
 module.exports.HerramientaModel = mongoose.model('Herramienta', HerramientaSchema);

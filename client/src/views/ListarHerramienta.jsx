@@ -6,6 +6,9 @@ import MUIDataTable from "mui-datatables";
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, TableBody } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'; // Importa el icono de info
 
 import DashboardHerraminenta from "../components/Herramientas/DashboardHerraminenta";
 import { Link } from "react-router-dom";
@@ -38,9 +41,9 @@ const ListarHerramienta = () => {
         const fechaFormateada = `${day}/${month}/${year}`;
         return fechaFormateada;
     };
-    
-  
-    
+
+
+
 
     const consultaVencimineto = (date) => {
         const fechaProximaCalibracion = new Date(date);
@@ -49,9 +52,9 @@ const ListarHerramienta = () => {
         return Number(dias);
     };
 
-    const consultaStatus = (date) => {
+    const consultaStatus = (date, observaciones) => {
         const diasVencimiento = consultaVencimineto(date);
-        const texto = diasVencimiento <= 0 ? 'Vencido' : 'Vigente';
+        const texto = (diasVencimiento <= 0 && observaciones == "En Calibracion") ? 'En calibracion' : (diasVencimiento <= 0 ? 'Vencido' : 'Vigente');
         return (texto);
     };
     const formatoStatus = (status) => {
@@ -61,6 +64,32 @@ const ListarHerramienta = () => {
                 <Chip label={status} color={color} />
             </Stack>
         );
+    };
+    const formatoObservaciones = (observaciones, herramientaId) => {
+        if (observaciones === "") {
+            return (
+                <Link to={`/sistema/herramientas/calibrar/${herramientaId}`}>
+                    <Chip
+                        label="Enviar a calibración"
+                        color="primary" // Cambia el color del chip según tus preferencias
+                        icon={<FontAwesomeIcon icon={faArrowAltCircleRight} />} // Agrega el icono a tu chip
+                    />
+                </Link>
+            );
+        } else if (observaciones === "En Calibracion") {
+            return (
+                <Link to={`/sistema/herramientas/calibrar/${herramientaId}`}>
+                    <Chip
+                        label="Actualizar Certificado"
+                        color="warning"
+
+                        icon={<FontAwesomeIcon icon={faInfoCircle} />} // Agrega el mismo icono aquí si deseas mantenerlo consistente
+                    />
+                </Link>
+            );
+        } else {
+            return null;
+        }
     };
 
 
@@ -131,6 +160,12 @@ const ListarHerramienta = () => {
             },
         },
         {
+            name: "Observaciones",
+            options: {
+                filter: false,
+            }
+        },
+        {
             name: "Responsable",
             options: {
                 viewColumns: false,
@@ -159,11 +194,13 @@ const ListarHerramienta = () => {
             "Fecha de Calibración": formatDate(herramienta.ultimaCalibracion),
             "Proxima Calibración": formatDate(herramienta.proximaCalibracion),
             "Dias para Vencimiento": consultaVencimineto(herramienta.proximaCalibracion),
-            "Status": consultaStatus(herramienta.proximaCalibracion),
+            "Status": consultaStatus(herramienta.proximaCalibracion, herramienta.observaciones),
+            "Observaciones": formatoObservaciones(herramienta.observaciones, herramienta._id),
             "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
             "Acciones": (
                 <>
-                    <Link to={`/sistema/herramientas/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
+
+                    <Link to={`/sistema/herramientas/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3" title="Editar herramienta"><i className="fa fa-edit"></i></Link>
                     <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
                 </>
             )
@@ -196,7 +233,7 @@ const ListarHerramienta = () => {
                                     <TableBody>
                                         <TableRow>
                                             <TableCell component="th" scope="row">
-                                                {rowData[8]}
+                                                {rowData[9]}
                                             </TableCell>
                                             <TableCell>{rowData[2]}</TableCell>
                                             <TableCell>{rowData[3]}</TableCell>

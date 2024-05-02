@@ -4,12 +4,17 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { TableRow, TableCell, Collapse, Box, Typography, Table, TableHead, TableBody } from '@mui/material';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'; // Importa el icono de info
+
 
 import { Link } from "react-router-dom";
 import DeleteHerramienta from "../DeleteHerramienta";
 import SubMenu from "../SubMenu";
 import useAxios from "../../hooks/useAxios";
 import DashboardHerraminenta from "./DashboardHerraminenta";
+
 
 const ListarHerramientasVencidas = () => {
     const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
@@ -45,9 +50,9 @@ const ListarHerramientasVencidas = () => {
         return Number(dias);
     };
 
-    const consultaStatus = (date) => {
+    const consultaStatus = (date, observaciones) => {
         const diasVencimiento = consultaVencimineto(date);
-        const texto = diasVencimiento <= 0 ? 'Vencido' : 'Vigente';
+        const texto = (diasVencimiento <= 0 && observaciones == "En Calibracion") ? 'En calibración' : (diasVencimiento <= 0 ? 'Vencido' : 'Vigente');
         return (texto);
     };
     const formatoStatus = (status) => {
@@ -59,6 +64,33 @@ const ListarHerramientasVencidas = () => {
         );
     };
 
+
+    const formatoObservaciones = (observaciones, herramientaId) => {
+        if (observaciones === "") {
+            return (
+                <Link to={`/sistema/herramientas/calibrar/${herramientaId}`}>
+                    <Chip
+                        label="Enviar a calibración"
+                        color="primary" // Cambia el color del chip según tus preferencias
+                        icon={<FontAwesomeIcon icon={faArrowAltCircleRight} />} // Agrega el icono a tu chip
+                    />
+                </Link>
+            );
+        } else if (observaciones === "En Calibracion") {
+            return (
+                <Link to={`/sistema/herramientas/certificado/${herramientaId}`}>
+                    <Chip
+                        label="Actualizar Certificado"
+                        color="warning"
+
+                        icon={<FontAwesomeIcon icon={faInfoCircle} />} // Agrega el mismo icono aquí si deseas mantenerlo consistente
+                    />
+                </Link>
+            );
+        } else {
+            return null;
+        }
+    };
 
     const columns = [
         {
@@ -120,6 +152,14 @@ const ListarHerramientasVencidas = () => {
             },
         },
         {
+            name: "Observaciones",
+            options: {
+
+                filter: false,
+            }
+
+        },
+        {
             name: "Responsable",
             options: {
                 viewColumns: false,
@@ -146,15 +186,17 @@ const ListarHerramientasVencidas = () => {
         "Fecha de Calibración": formatDate(herramienta.ultimaCalibracion),
         "Proxima Calibración": formatDate(herramienta.proximaCalibracion),
         "Dias para Vencimiento": consultaVencimineto(herramienta.proximaCalibracion),
-        "Status": consultaStatus(herramienta.proximaCalibracion),
+        "Status": consultaStatus(herramienta.proximaCalibracion, herramienta.observaciones),
+        "Observaciones": formatoObservaciones(herramienta.observaciones, herramienta._id), // Pasar herramienta._id como argumento
         "Responsable": `${herramienta.colaboradorId.nombre} ${herramienta.colaboradorId.apellido}`,
         "Acciones": (
             <>
-                <Link to={`/sistema/herramientas/update/${herramienta._id}`} className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
+                <Link to={`/sistema/herramientas/update/${herramienta._id}`} title="Editar herramienta" className="btn btn-outline-warning btn-sm me-3"><i className="fa fa-edit"></i></Link>
                 <DeleteHerramienta herramientaId={herramienta._id} identificacion={herramienta.identificacion} successCallback={DeleteSuccessHerramienta} />
             </>
         )
     }));
+
 
     const options = {
         filterType: 'checkbox',
@@ -183,7 +225,7 @@ const ListarHerramientasVencidas = () => {
                                     <TableBody>
                                         <TableRow>
                                             <TableCell component="th" scope="row">
-                                                {rowData[8]}
+                                                {rowData[9]}
                                             </TableCell>
                                             <TableCell>{rowData[2]}</TableCell>
                                             <TableCell>{rowData[3]}</TableCell>

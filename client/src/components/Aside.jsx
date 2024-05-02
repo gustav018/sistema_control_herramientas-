@@ -36,8 +36,9 @@ const Aside = () => {
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Opciones:</h6>
 
-                            <Link to="/sistema/herramientas/list" className="collapse-item" >Lista de herramientas</Link>
                             <Link to="/sistema/herramientas/nuevo" className="collapse-item" >Crear herramienta</Link>
+                            <Link to="/sistema/herramientas/list" className="collapse-item" >Lista de herramientas</Link>
+                            <Link to="/sistema/herramientas/vencidas" className="collapse-item" >Calibraciones</Link>
                         </div>
                     </div>
                 </li>
