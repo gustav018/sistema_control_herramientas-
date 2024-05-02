@@ -130,7 +130,7 @@ const UserForm = ({ formType }) => {
                     )}
                     {formType === 'login' && (
                         <div className="mb-3 text-end">
-                            <Link to='/recovery'>Olvidate tu contraseña?</Link>
+                            <Link to='/recovery'>¿Olvidaste tu contraseña?</Link>
                         </div>
                     )}
                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
