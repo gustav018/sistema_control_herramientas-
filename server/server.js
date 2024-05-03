@@ -58,8 +58,8 @@ const getUsers = async () => {
 // Programar tarea para enviar correos cada x tiempo 
 //(por ejemplo, cada minuto ='* * * * *' )
 const dia = 2; // Día del mes en que deseas ejecutar la tarea
-const hora = '20'; // Hora en formato de 24 horas
-const minuto = '09'; // Minuto en que deseas ejecutar la tarea
+const hora = '21'; // Hora en formato de 24 horas
+const minuto = '32'; // Minuto en que deseas ejecutar la tarea
 ////`${minuto} ${hora} ${dia} * *`
 cron.schedule(`${minuto} ${hora} ${dia} * *`, async () => {
   const users = await getUsers();
