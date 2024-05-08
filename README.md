@@ -29,7 +29,7 @@ En esta etapa se desarrollaron las siguientes funcionalidades:
   - Teléfono
 - **Reporte en PDF**: Genera reportes en formato ISO 9001.
 
-### Parte 2 - Desarrollo Colaborativo por Jorge Rodríguez
+### Parte 2 - Desarrollo Colaborativo junto con Jorge Rodríguez
 
 En esta etapa se añadieron las siguientes características:
 
