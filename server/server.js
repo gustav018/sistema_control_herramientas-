@@ -15,16 +15,10 @@ app.use(cookieParser());
 // Configuración de CORS corregida para producción
 const corsOptions = {
   credentials: true,
-  origin: [
-    'http://localhost:5173', 
-    'http://localhost:5174', 
-    'https://sistema-control-herramientas.vercel.app',
-    'https://sistema-control-herramientas-git-main-gustav018s-projects.vercel.app',
-    'https://sistema-control-herramientas-gustav018s-projects.vercel.app',
-    'https://sistema-control-git-7dc046-gustavofleitas18-gmailcoms-projects.vercel.app'
-  ],
+  origin: true, // Habilitar cualquier origen temporalmente para depuración
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: true
 };
 app.use(cors(corsOptions));
 
