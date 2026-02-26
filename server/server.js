@@ -15,10 +15,9 @@ app.use(cookieParser());
 // Configuración de CORS corregida para producción
 const corsOptions = {
   credentials: true,
-  origin: true, // Habilitar cualquier origen temporalmente para depuración
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 };
 app.use(cors(corsOptions));
 
@@ -168,7 +167,7 @@ cron.schedule(`${minuto} ${hora} ${dia} * *`, async () => {
 // --- LISTENER ---
 // Railway inyecta automáticamente la variable PORT
 const PORT = process.env.PORT || process.env.PUERTO || 8000;
-app.listen(PORT, '0.0.0.0', () => { // Escuchar en todas las interfaces de red
+app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en el puerto: ${PORT}`);
   console.log(`🔗 Base URL configurada: ${process.env.BASE_URL}`);
   console.log(`🌍 Entorno: ${process.env.NODE_ENV || 'development'}`);
