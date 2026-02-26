@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 const corsOptions = {
   credentials: true,
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://54.163.165.61'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://54.163.165.61', 'https://sistemacontrolherramientas-production.up.railway.app'],
   methods: 'GET, POST, PUT, PATCH, DELETE',
 };
 app.use(cors(corsOptions));
@@ -23,6 +23,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./config/mongoose.config");
+
+// Ruta raíz para verificar el estado del servidor
+app.get("/", (req, res) => {
+  res.json({
+    status: "active",
+    message: "Sistema de Control de Herramientas - API activa",
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      players: "/api/player",
+      colaboradores: "/api/colaborador",
+      herramientas: "/api/herramienta",
+      auth: "/api/auth"
+    }
+  });
+});
 
 const PlayerRouter = require("./routes/player.routes");
 app.use("/api/player", PlayerRouter);
