@@ -20,7 +20,8 @@ const corsOptions = {
     'http://localhost:5174', 
     'https://sistema-control-herramientas.vercel.app',
     'https://sistema-control-herramientas-git-main-gustav018s-projects.vercel.app',
-    'https://sistema-control-herramientas-gustav018s-projects.vercel.app'
+    'https://sistema-control-herramientas-gustav018s-projects.vercel.app',
+    'https://sistema-control-git-7dc046-gustavofleitas18-gmailcoms-projects.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
