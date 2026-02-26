@@ -11,7 +11,10 @@ module.exports = {
             .then(() => {
                 res.json({ msg: "success!", user: user });
             })
-            .catch(err => res.json(err));
+            .catch(err => {
+                console.error("Register Error:", err);
+                res.status(400).json(err);
+            });
     },
     logout: (req, res) => {
         // clear the cookie from the response
@@ -24,7 +27,7 @@ module.exports = {
         UserModel.findOne({ email: req.body.email })
             .then(user => {
                 if (user === null) {
-                    res.status(400).json({ msg: "invalid login attempt" });
+                    res.status(401).json({ msg: "Usuario no encontrado" });
                 } else {
                     if (req.body.password === undefined) {
                         res.status(400).json({ msg: "invalid login attempt" });
@@ -55,7 +58,8 @@ module.exports = {
                                     })
                                     .json({ msg: "success!", user: userInfo, newJWT });
                             } else {
-                                res.status(401).json({ msg: "invalid login attempt" });
+                                console.log("Password invalid for user:", user.email);
+                                res.status(401).json({ msg: "Contraseña incorrecta" });
                             }
                         })
                         .catch(err => res.status(401).json({ msg: "invalid login attempt", error: err }));

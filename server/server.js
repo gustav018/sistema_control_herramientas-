@@ -1,3 +1,6 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+
 const express = require("express");
 const cors = require('cors');
 const app = express();
@@ -7,13 +10,11 @@ const cron = require('node-cron');
 const moment = require('moment');
 
 
-require('dotenv').config();
-
 app.use(cookieParser());
 
 const corsOptions = {
   credentials: true,
-  origin: ['http://localhost:5173', 'http://54.163.165.61', '*'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://54.163.165.61'],
   methods: 'GET, POST, PUT, PATCH, DELETE',
 };
 app.use(cors(corsOptions));
