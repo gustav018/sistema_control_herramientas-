@@ -21,7 +21,7 @@ const ColaboradorFormUpdate = () => {
     const { values: colaborador, handleChange, setValues } = useForm(initialValues)
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/colaborador/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
+        axios.get(`https://sistemacontrolherramientas-production.up.railway.app/api/colaborador/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
             .then(res => {
                 console.log(res.data.colaborador)
                 setValues({
@@ -42,7 +42,7 @@ const ColaboradorFormUpdate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`http://localhost:8000/api/colaborador/${id}`, colaborador, { withCredentials: true })
+        axios.put(`https://sistemacontrolherramientas-production.up.railway.app/api/colaborador/${id}`, colaborador, { withCredentials: true })
             .then(res => {
                 console.log(res.data.colaborador)
                 Swal.fire({

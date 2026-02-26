@@ -12,7 +12,7 @@ const EstadoCalibracion = () => {
     const { id } = useParams();
 
 
-    const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("http://localhost:8000/api/herramienta");
+    const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta");
 
     const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const EstadoCalibracion = () => {
             handleChange({ target: { name: 'proximaCalibracion', value: proximaCalibracion } });
         }
 
-        axios.get(`http://localhost:8000/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
+        axios.get(`https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
             .then(res => {
                 console.log(res.data.herramienta)
                 setValues({
@@ -100,7 +100,7 @@ const EstadoCalibracion = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`http://localhost:8000/api/herramienta/${id}`, herramienta, { withCredentials: true })
+        axios.put(`https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/${id}`, herramienta, { withCredentials: true })
             .then(res => {
                 console.log(res.data.herramienta)
                 Swal.fire({
@@ -116,7 +116,7 @@ const EstadoCalibracion = () => {
                 setError(err.response.data.error.message)
             })
     }
-    const { data, isLoading } = useAxios("http://localhost:8000/api/colaborador");
+    const { data, isLoading } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
 
     if (isLoading) {
         return <div>Loading...</div>;

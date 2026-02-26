@@ -22,7 +22,7 @@ const ColaboradorForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8000/api/colaborador', colaborador)
+        axios.post('https://sistemacontrolherramientas-production.up.railway.app/api/colaborador', colaborador)
             .then(res => {
                 console.log(res.data.colaborador)
 

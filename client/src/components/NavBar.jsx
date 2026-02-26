@@ -15,7 +15,7 @@ const NavBar = () => {
 
     const logoutUser = async () => {
         try {
-            await axios.post("http://localhost:8000/api/auth/logout",
+            await axios.post("https://sistemacontrolherramientas-production.up.railway.app/api/auth/logout",
                 { withCredentials: true }
             );
             localStorage.removeItem("user");

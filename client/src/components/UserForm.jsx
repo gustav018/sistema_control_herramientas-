@@ -42,7 +42,7 @@ const UserForm = ({ formType }) => {
     const registerUser = async (values, setErrors) => {
         try {
             await axios.post(
-                "http://localhost:8000/api/auth/register",
+                "https://sistemacontrolherramientas-production.up.railway.app/api/auth/register",
                 values,
                 { withCredentials: true }
             );
@@ -56,7 +56,7 @@ const UserForm = ({ formType }) => {
     const loginUser = async (values, setErrors) => {
         try {
             let res = await axios.post(
-                "http://localhost:8000/api/auth/login",
+                "https://sistemacontrolherramientas-production.up.railway.app/api/auth/login",
                 values,
                 { withCredentials: true }
             );

@@ -12,7 +12,7 @@ import useAxios from "../../hooks/useAxios";
 const CrearHerramienta = () => {
   const [totalHerramientas, setTotalHerramientas] = useState(0);
 
-  const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("http://localhost:8000/api/herramienta");
+  const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta");
 
   const navigate = useNavigate();
   const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
@@ -96,7 +96,7 @@ const CrearHerramienta = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/herramienta', herramienta)
+    axios.post('https://sistemacontrolherramientas-production.up.railway.app/api/herramienta', herramienta)
       .then(res => {
         console.log(res.data.herramienta)
 
@@ -121,7 +121,7 @@ const CrearHerramienta = () => {
         setError(err.response.data.error.message)
       })
   }
-  const { data, isLoading } = useAxios("http://localhost:8000/api/colaborador");
+  const { data, isLoading } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
 
   if (isLoading) {
     return <div>Loading...</div>;

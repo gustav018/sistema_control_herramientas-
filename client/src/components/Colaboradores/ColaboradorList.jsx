@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const ColaboradorList = () => {
     {/* nombre, apellido, cedula, email, celular */ }
-    const { data, isLoading, error, setData } = useAxios("http://localhost:8000/api/colaborador");
+    const { data, isLoading, error, setData } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
 
     if (error) {
         return <div>{error.message}</div>;

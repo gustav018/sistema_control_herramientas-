@@ -16,7 +16,7 @@ const DeleteColaborador = ({ colaboradorId, identificacion, successCallback }) =
             confirmButtonText: "Si, eliminalo!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:8000/api/colaborador/${colaboradorId}`, { withCredentials: true })
+                axios.delete(`https://sistemacontrolherramientas-production.up.railway.app/api/colaborador/${colaboradorId}`, { withCredentials: true })
                     .then(res => {
                         console.log(res)
                         successCallback(colaboradorId)

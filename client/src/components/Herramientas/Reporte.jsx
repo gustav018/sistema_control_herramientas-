@@ -12,7 +12,7 @@ const Reporte = () => {
   const idUsuario = idUsuarioLogin();
   console.log(idUsuario)
 
-  const { data: datos, isLoading, error } = useAxios("http://localhost:8000/api/herramienta/user/" + idUsuario);
+  const { data: datos, isLoading, error } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/user/" + idUsuario);
 
   useEffect(() => {
 

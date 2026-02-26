@@ -4,7 +4,7 @@ import autoTable from 'jspdf-autotable';
 import useAxios from "../hooks/useAxios";
 
 const ReporteIso = () => {
-  const { data: datos, isLoading, error } = useAxios("http://localhost:8000/api/herramienta");
+  const { data: datos, isLoading, error } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta");
 
   useEffect(() => {
     // Generate PDF when component mounts
