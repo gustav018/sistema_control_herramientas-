@@ -66,7 +66,10 @@ const UserForm = ({ formType }) => {
             navigate("/");
         } catch (err) {
             console.log("Error: ", err.response);
-            setErrors({ general: err.response.data.msg });
+            const errorMsg = err.response && err.response.data && err.response.data.msg 
+                ? err.response.data.msg 
+                : "Error de conexión o servidor no disponible";
+            setErrors({ general: errorMsg });
         }
     };
 

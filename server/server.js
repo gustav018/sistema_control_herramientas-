@@ -18,7 +18,9 @@ const corsOptions = {
   origin: [
     'http://localhost:5173', 
     'http://localhost:5174', 
-    'https://sistema-control-herramientas.vercel.app' // URL de tu frontend
+    'https://sistema-control-herramientas.vercel.app',
+    'https://sistema-control-herramientas-git-main-gustav018s-projects.vercel.app',
+    'https://sistema-control-herramientas-gustav018s-projects.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
