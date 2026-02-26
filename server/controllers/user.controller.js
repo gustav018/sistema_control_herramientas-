@@ -17,12 +17,13 @@ module.exports = {
             });
     },
     logout: (req, res) => {
-        // clear the cookie from the response
-        res.clearCookie("usertoken");
-        res.status(200).json({
-            message: "You have successfully logged out of our system",
-        });
-    },
+    res.clearCookie("usertoken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+    });
+    res.status(200).json({ message: "Logged out" });
+},
     login: (req, res) => {
         UserModel.findOne({ email: req.body.email })
             .then(user => {

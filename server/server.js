@@ -71,7 +71,7 @@ const transporter = nodemailer.createTransport({
 // Lista de usuarios (deberías obtener esto de tu base de datos)
 const getUsers = async () => {
   const fetch = await import('node-fetch');
-  const response = await fetch.default('http://127.0.0.1:8000/api/auth/correos');
+  const response = await fetch.default(`${process.env.BASE_URL}/api/auth/correos`);
   const users = await response.json();
   return users.map(user => ({ id: user._id, email: user.email, name: `${user.firstName} ${user.lastName}` }));
 };
@@ -187,5 +187,5 @@ cron.schedule(`${minuto} ${hora} ${dia} * *`, async () => {
   });
 });
 
-const PORT = process.env.PUERTO || 8000;
+const PORT = process.env.PORT || process.env.PUERTO || 8000;
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
