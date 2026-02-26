@@ -55,6 +55,8 @@ module.exports = {
                                     .cookie("usertoken", newJWT, {
                                         httpOnly: true,
                                         expires: new Date(Date.now() + 900000000),
+                                        secure: true,       // <--- AGREGAR ESTO
+                                        sameSite: 'none',   // <--- AGREGAR ESTO (en minúsculas y entre comillas)
                                     })
                                     .json({ msg: "success!", user: userInfo, newJWT });
                             } else {
