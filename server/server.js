@@ -168,7 +168,9 @@ cron.schedule(`${minuto} ${hora} ${dia} * *`, async () => {
 // --- LISTENER ---
 // Railway inyecta automáticamente la variable PORT
 const PORT = process.env.PORT || process.env.PUERTO || 8000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => { // Escuchar en todas las interfaces de red
   console.log(`🚀 Servidor corriendo en el puerto: ${PORT}`);
   console.log(`🔗 Base URL configurada: ${process.env.BASE_URL}`);
+  console.log(`🌍 Entorno: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📡 MONGODB_URI definida: ${process.env.MONGODB_URI ? 'SÍ' : 'NO'}`);
 });
