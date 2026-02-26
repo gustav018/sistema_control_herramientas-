@@ -42,7 +42,7 @@ const UserForm = ({ formType }) => {
     const registerUser = async (values, setErrors) => {
         try {
             await axios.post(
-                "https://sistemacontrolherramientas-production.up.railway.app/api/auth/register",
+                import.meta.env.VITE_API_URL + "/api/auth/register",
                 values,
                 { withCredentials: true }
             );
@@ -56,7 +56,7 @@ const UserForm = ({ formType }) => {
     const loginUser = async (values, setErrors) => {
         try {
             let res = await axios.post(
-                "https://sistemacontrolherramientas-production.up.railway.app/api/auth/login",
+                import.meta.env.VITE_API_URL + "/api/auth/login",
                 values,
                 { withCredentials: true }
             );

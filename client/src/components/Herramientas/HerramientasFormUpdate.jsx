@@ -12,7 +12,7 @@ const HerramientasFormUpdate = () => {
     const { id } = useParams();
 
 
-    const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta");
+    const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios(import.meta.env.VITE_API_URL + "/api/herramienta");
 
     const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ const HerramientasFormUpdate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/${id}`, herramienta, { withCredentials: true })
+        axios.put(`${import.meta.env.VITE_API_URL}/api/herramienta/${id}`, herramienta, { withCredentials: true })
             .then(res => {
                 console.log(res.data.herramienta)
                 Swal.fire({
@@ -114,7 +114,7 @@ const HerramientasFormUpdate = () => {
                 setError(err.response.data.error.message)
             })
     }
-    const { data, isLoading } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
+    const { data, isLoading } = useAxios(import.meta.env.VITE_API_URL + "/api/colaborador");
 
     if (isLoading) {
         return <div>Loading...</div>;

@@ -18,7 +18,7 @@ const ListarHerramienta = () => {
     const idUsuario = idUsuarioLogin();
 
 
-    const { data, isLoading, error, setData } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/user/" + idUsuario);
+    const { data, isLoading, error, setData } = useAxios(import.meta.env.VITE_API_URL + "/api/herramienta/user/" + idUsuario);
 
 
     if (error) {

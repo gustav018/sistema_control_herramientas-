@@ -7,7 +7,7 @@ const HerramientasVencidas = () => {
     const idUsuario = idUsuarioLogin();
     const [totalHerramientasVencidas, setTotalHerramientasVencidas] = useState(0);
 
-    const { data, isLoading, error } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/user/" + idUsuario);
+    const { data, isLoading, error } = useAxios(import.meta.env.VITE_API_URL + "/api/herramienta/user/" + idUsuario);
 
     useEffect(() => {
         if (data) {

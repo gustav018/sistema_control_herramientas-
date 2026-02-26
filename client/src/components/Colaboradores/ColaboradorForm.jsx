@@ -22,7 +22,7 @@ const ColaboradorForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('https://sistemacontrolherramientas-production.up.railway.app/api/colaborador', colaborador)
+        axios.post(import.meta.env.VITE_API_URL + '/api/colaborador', colaborador)
             .then(res => {
                 console.log(res.data.colaborador)
 

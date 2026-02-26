@@ -12,7 +12,7 @@ const EstadoCalibracion = () => {
     const { id } = useParams();
 
 
-    const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta");
+    const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios(import.meta.env.VITE_API_URL + "/api/herramienta");
 
     const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const EstadoCalibracion = () => {
             handleChange({ target: { name: 'proximaCalibracion', value: proximaCalibracion } });
         }
 
-        axios.get(`https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
+        axios.get(`${import.meta.env.VITE_API_URL}/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
             .then(res => {
                 console.log(res.data.herramienta)
                 setValues({
@@ -116,7 +116,7 @@ const EstadoCalibracion = () => {
                 setError(err.response.data.error.message)
             })
     }
-    const { data, isLoading } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
+    const { data, isLoading } = useAxios(import.meta.env.VITE_API_URL + "/api/colaborador");
 
     if (isLoading) {
         return <div>Loading...</div>;

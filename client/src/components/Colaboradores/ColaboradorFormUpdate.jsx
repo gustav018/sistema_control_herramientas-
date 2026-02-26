@@ -42,7 +42,7 @@ const ColaboradorFormUpdate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`https://sistemacontrolherramientas-production.up.railway.app/api/colaborador/${id}`, colaborador, { withCredentials: true })
+        axios.put(`${import.meta.env.VITE_API_URL}/api/colaborador/${id}`, colaborador, { withCredentials: true })
             .then(res => {
                 console.log(res.data.colaborador)
                 Swal.fire({

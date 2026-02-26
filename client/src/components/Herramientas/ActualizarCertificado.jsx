@@ -101,7 +101,7 @@ const ActualizarCertificado = () => {
                 setError(err.response.data.error.message)
             })
     }
-    const { data, isLoading } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
+    const { data, isLoading } = useAxios(import.meta.env.VITE_API_URL + "/api/colaborador");
 
     if (isLoading) {
         return <div>Loading...</div>;

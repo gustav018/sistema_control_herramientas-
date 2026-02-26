@@ -12,7 +12,7 @@ import useAxios from "../../hooks/useAxios";
 const CrearHerramienta = () => {
   const [totalHerramientas, setTotalHerramientas] = useState(0);
 
-  const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/herramienta");
+  const { data: herramientasData, isLoading: isLoadingHerramientas } = useAxios(import.meta.env.VITE_API_URL + "/api/herramienta");
 
   const navigate = useNavigate();
   const idUsuarioLogin = () => JSON.parse(localStorage.getItem('user'))?._id || '';
@@ -121,7 +121,7 @@ const CrearHerramienta = () => {
         setError(err.response.data.error.message)
       })
   }
-  const { data, isLoading } = useAxios("https://sistemacontrolherramientas-production.up.railway.app/api/colaborador");
+  const { data, isLoading } = useAxios(import.meta.env.VITE_API_URL + "/api/colaborador");
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -15,7 +15,7 @@ const NavBar = () => {
 
     const logoutUser = async () => {
         try {
-            await axios.post("https://sistemacontrolherramientas-production.up.railway.app/api/auth/logout",
+            await axios.post(import.meta.env.VITE_API_URL + "/api/auth/logout",
                 { withCredentials: true }
             );
             localStorage.removeItem("user");
