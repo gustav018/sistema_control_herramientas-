@@ -14,7 +14,12 @@ app.use(cookieParser());
 
 const corsOptions = {
   credentials: true,
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://54.163.165.61', 'https://sistemacontrolherramientas-production.up.railway.app'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:5174', 
+    'http://54.163.165.61', 
+    'https://sistema-control-herramientas.vercel.app',
+    'https://sistemacontrolherramientas-production.up.railway.app'],
   methods: 'GET, POST, PUT, PATCH, DELETE',
 };
 app.use(cors(corsOptions));
