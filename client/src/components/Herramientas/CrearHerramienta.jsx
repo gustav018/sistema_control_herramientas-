@@ -96,7 +96,7 @@ const CrearHerramienta = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('https://sistemacontrolherramientas-production.up.railway.app/api/herramienta', herramienta)
+    axios.post(import.meta.env.VITE_API_URL + '/api/herramienta', herramienta)
       .then(res => {
         console.log(res.data.herramienta)
 

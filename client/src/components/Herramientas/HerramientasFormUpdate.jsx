@@ -44,7 +44,7 @@ const HerramientasFormUpdate = () => {
             handleChange({ target: { name: 'proximaCalibracion', value: proximaCalibracion } });
         }
 
-        axios.get(`https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
+        axios.get(`${import.meta.env.VITE_API_URL}/api/herramienta/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
             .then(res => {
                 console.log(res.data.herramienta)
                 setValues({

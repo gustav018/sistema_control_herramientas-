@@ -21,7 +21,7 @@ const ColaboradorFormUpdate = () => {
     const { values: colaborador, handleChange, setValues } = useForm(initialValues)
 
     useEffect(() => {
-        axios.get(`https://sistemacontrolherramientas-production.up.railway.app/api/colaborador/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
+        axios.get(`${import.meta.env.VITE_API_URL}/api/colaborador/${id}`, { withCredentials: true }) // Agregar esta linea para enviar las cookies en el request
             .then(res => {
                 console.log(res.data.colaborador)
                 setValues({

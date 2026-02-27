@@ -85,7 +85,7 @@ const ActualizarCertificado = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`https://sistemacontrolherramientas-production.up.railway.app/api/herramienta/${id}`, herramienta, { withCredentials: true })
+        axios.put(`${import.meta.env.VITE_API_URL}/api/herramienta/${id}`, herramienta, { withCredentials: true })
             .then(res => {
                 console.log(res.data.herramienta)
                 Swal.fire({
