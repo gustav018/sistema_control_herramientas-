@@ -59,8 +59,10 @@ const UserForm = ({ formType }) => {
 
     const registerUser = async (values, setErrors) => {
         try {
+            const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+            const apiUrl = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
             await axios.post(
-                import.meta.env.VITE_API_URL + "/api/auth/register",
+                apiUrl + "/api/auth/register",
                 values,
                 { withCredentials: true }
             );
@@ -73,8 +75,10 @@ const UserForm = ({ formType }) => {
 
     const loginUser = async (values, setErrors) => {
         try {
+            const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+            const apiUrl = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
             let res = await axios.post(
-                import.meta.env.VITE_API_URL + "/api/auth/login",
+                apiUrl + "/api/auth/login",
                 values,
                 { withCredentials: true }
             );
