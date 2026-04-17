@@ -4,12 +4,29 @@ import axios from "axios";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 const UserForm = ({ formType }) => {
     const { setUser } = useContext(UserContext);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const [apiStatus, setApiStatus] = useState(null);
+    const [apiUrl, setApiUrl] = useState('');
+
+    useEffect(() => {
+        const fetchStatus = async () => {
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+            setApiUrl(url);
+            try {
+                const res = await axios.get(url + '/');
+                setApiStatus(res.data);
+            } catch (e) {
+                setApiStatus({ status: 'error', db_status: 'desconocida' });
+            }
+        };
+        if (formType === 'login') fetchStatus();
+    }, [formType]);
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -66,8 +83,8 @@ const UserForm = ({ formType }) => {
             navigate("/");
         } catch (err) {
             console.log("Error: ", err.response);
-            const errorMsg = err.response && err.response.data && err.response.data.msg 
-                ? err.response.data.msg 
+            const errorMsg = err.response && err.response.data && err.response.data.msg
+                ? err.response.data.msg
                 : "Error de conexión o servidor no disponible";
             setErrors({ general: errorMsg });
         }
@@ -87,6 +104,13 @@ const UserForm = ({ formType }) => {
                 <Form>
 
                     <h2>{formType === 'login' ? 'Iniciar Sesion' : 'Registrarse'}</h2>
+                    {formType === 'login' && apiStatus && (
+                        <div className={`alert ${apiStatus.status === 'active' ? 'alert-info' : 'alert-warning'} mb-3 p-2`} style={{ fontSize: '0.85rem' }}>
+                            <strong>API URL:</strong> {apiUrl} <br />
+                            <strong>Servidor:</strong> {apiStatus.status === 'active' ? 'Activo 🟢' : 'Inactivo 🔴'} <br />
+                            <strong>Base de Datos:</strong> {apiStatus.db_status === 'conectada' ? 'Conectada 🟢' : 'Desconectada/Error 🔴'}
+                        </div>
+                    )}
                     {errors?.general && (
                         <div className="alert alert-danger" role="alert">
                             {errors.general}

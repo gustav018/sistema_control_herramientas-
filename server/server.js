@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 const cookieParser = require('cookie-parser');
 const cron = require('node-cron');
 const moment = require('moment');
+const mongoose = require('mongoose');
 
 // --- MIDDLEWARES ---
 app.use(cookieParser());
@@ -16,8 +17,8 @@ app.use(cookieParser());
 const corsOptions = {
   credentials: true,
   origin: [
-    'http://localhost:5173', 
-    'http://localhost:5174', 
+    'http://localhost:5173',
+    'http://localhost:5174',
     'https://sistema-control-herramientas.vercel.app',
     'https://sistema-control-herramientas-git-main-gustav018s-projects.vercel.app',
     'https://sistema-control-herramientas-gustav018s-projects.vercel.app',
@@ -36,10 +37,18 @@ require("./config/mongoose.config");
 
 // --- RUTAS ---
 app.get("/", (req, res) => {
+  let dbStatus = "desconectada";
+  if (mongoose.connection && mongoose.connection.readyState === 1) {
+    dbStatus = "conectada";
+  } else if (mongoose.connection && mongoose.connection.readyState === 2) {
+    dbStatus = "conectando";
+  }
+
   res.json({
     status: "active",
     message: "Sistema de Control de Herramientas - API activa",
     timestamp: new Date().toISOString(),
+    db_status: dbStatus,
     endpoints: {
       players: "/api/player",
       colaboradores: "/api/colaborador",
@@ -49,6 +58,7 @@ app.get("/", (req, res) => {
   });
 });
 
+// --- RUTAS API ---
 app.use("/api/player", require("./routes/player.routes"));
 app.use("/api/colaborador", require("./routes/colaborador.routes"));
 app.use("/api/herramienta", require("./routes/herramienta.routes"));
@@ -58,7 +68,7 @@ app.use("/api/auth", require("./routes/user.routes"));
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT,
-  secure: true, 
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -72,10 +82,10 @@ const getUsers = async () => {
   // Corregido: Uso de BASE_URL con backticks
   const response = await fetch.default(`${process.env.BASE_URL}/api/auth/correos`);
   const users = await response.json();
-  return users.map(user => ({ 
-    id: user._id, 
-    email: user.email, 
-    name: `${user.firstName} ${user.lastName}` 
+  return users.map(user => ({
+    id: user._id,
+    email: user.email,
+    name: `${user.firstName} ${user.lastName}`
   }));
 };
 
@@ -96,7 +106,7 @@ cron.schedule(`${minuto} ${hora} ${dia} * *`, async () => {
       const data = await response.json();
 
       // Generar filas para herramientas vencidas
-      let rowsVencidas = data.herramientasVencidas.length > 0 
+      let rowsVencidas = data.herramientasVencidas.length > 0
         ? data.herramientasVencidas.map(h => `
             <tr style="border: 1px solid black;">
               <td style="border: 1px solid black;">${h.identificacion}</td>
