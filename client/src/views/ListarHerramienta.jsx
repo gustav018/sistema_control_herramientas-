@@ -273,6 +273,11 @@ const ListarHerramienta = () => {
 
             <DashboardHerraminenta />
 
+            <div className="mt-3 text-end">
+                <Link to="/sistema/herramientas/importar" className="btn btn-success">
+                    <i className="fa fa-file-excel"></i> Importar Masivo (Excel)
+                </Link>
+            </div>
 
             <hr />
             <MUIDataTable

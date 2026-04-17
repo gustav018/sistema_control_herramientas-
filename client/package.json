@@ -34,6 +34,7 @@
     "select2": "^4.1.0-rc.0",
     "styled-components": "^6.1.8",
     "sweetalert2": "^11.10.6",
+    "xlsx": "^0.18.5",
     "yup": "^1.4.0"
   },
   "devDependencies": {
