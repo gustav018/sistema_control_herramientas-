@@ -16,7 +16,8 @@ const UserForm = ({ formType }) => {
 
     useEffect(() => {
         const fetchStatus = async () => {
-            const url = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+            const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+            const url = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
             setApiUrl(url);
             try {
                 const res = await axios.get(url + '/');
