@@ -66,7 +66,7 @@ const ListarHerramientasVencidas = () => {
 
 
     const formatoObservaciones = (observaciones, herramientaId) => {
-        if (observaciones === "") {
+        if (!observaciones || observaciones.trim() === "") {
             return (
                 <Link to={`/sistema/herramientas/calibrar/${herramientaId}`}>
                     <Chip
